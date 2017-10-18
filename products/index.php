@@ -6,23 +6,8 @@
 // Get the database connection file, the acme Model (for the getCategories() function), and the products Model
 require_once '../library/connections.php';
 require_once '../model/acme-model.php';
-require_once '../model/products-mode.php';
+require_once '../model/products-model.php';
 
-
-
-////////////////////////////////////////////////////////////////////////////////
-// Page Control Logic
-switch ($action) {
-	case 'newCategory':
-		include "../view/new-cat.php";
-		break;
-	case 'newProduct':
-		include "../view/new-prod.php";
-		break;
-	default:
-		include "../view/prod-mgmt.php";
-}
-////////////////////////////////////////////////////////////////////////////////
 
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -38,9 +23,28 @@ foreach ($categories as $category) {
 $navList .= '</ul>';
 
 // Build a dropdown of categories for new-prod.php
-$catList .= '<select name="catListDropDown">';
+$catList = '<select name="catListDropDown">';
 foreach ($categories as $category) {
     $catList .= "<option value='$category[categoryId]'>$category[categoryName]</option>";
 }
 $catList .= '</select>';
+////////////////////////////////////////////////////////////////////////////////
+
+
+
+////////////////////////////////////////////////////////////////////////////////
+// Page Control Logic
+if (isset($action) == FALSE){
+    $action="";
+}
+switch ($action) {
+	case 'newCategory':
+		include "../view/new-cat.php";
+		break;
+	case 'newProduct':
+		include "../view/new-prod.php";
+		break;
+	default:
+		include "../view/prod-mgmt.php";
+}
 ////////////////////////////////////////////////////////////////////////////////
