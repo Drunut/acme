@@ -130,11 +130,8 @@ nav a:link, nav a:visited{
 Home
 *****************/
 
-indexMain{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 3%
+.indexMain{
+
 }
 
 h1{
@@ -262,6 +259,19 @@ Registration
 *****************/
 #registrationMain{
     
+}
+
+/*****************
+Product Management
+*****************/
+
+#pMList li{
+    margin: 2vw 0vw;
+    padding-left: 4vw;
+}
+
+#pMMain p{
+    margin-top: 2vw;
 }
 /****************************************************************************************************/
                                             /* FOOTER */
