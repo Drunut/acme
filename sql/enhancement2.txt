@@ -1,0 +1,34 @@
+-- Insert into the clients table
+INSERT INTO clients
+( clientFirstname
+, clientLastname
+, clientEmail
+, clientPassword
+, comments)
+VALUES
+( 'Tony'
+, 'Stark'
+, 'tony@starkent.com'
+, 'Iam1ronM@n'
+, "I am the real Ironman");
+
+-- Modify the Tony Stark record to change the clientLevel to 3.
+UPDATE clients
+SET clientLevel = '3'
+WHERE clientFirstname = 'Tony';
+
+-- Modify the "Nylon Rope" record to read "Climbing Rope" using a single query. The change must change all instances of "nylon" to "climbing" in the record except the invStyle field.
+UPDATE inventory
+SET invDescription	= 	replace(invDescription, "nylon", "climbing")
+,	invName 		= 	replace(invName, "Nylon", "Climbing")
+WHERE invName LIKE "Nylon%";
+
+-- Use an inner join to select the invName field from the inventory table and the categoryName field from the categories table for inventory items that belong to the "Misc" category.
+SELECT i.invName, c.categoryName
+FROM inventory i INNER JOIN categories c
+ON i.categoryId = c.categoryId
+WHERE categoryName = "Misc";
+
+-- Delete the Koenigsegg CCX car from the database.
+DELETE FROM inventory
+WHERE invName = "Koenigsegg CCX Car"

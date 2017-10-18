@@ -1,0 +1,318 @@
+/***********************************************************
+Personally condensed Meyerweb CSS Reset originally found at:
+http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*****************************/
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ol, ul, li, article, aside, figure, figcaption, footer, header, nav, section{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+body {
+    line-height: 1;
+    overflow-x: hidden;
+}
+ol, ul {
+    list-style: none;
+}
+/**************************
+End Modified Meyerweb Reset
+**************************/
+
+
+body{
+    font-size: 15.6px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    /* justify-content: center;
+    /* These two rules make the floatFrame sit in the middle of the page for @media later. */
+    /* align-items: center; */
+
+    background-image:  url(../images/site/background.jpg) /* Whatever I want what's behind the floatFrame to be */;
+    display: flex;
+    justify-content: center;
+}
+
+#floatFrame{
+    margin: 0 3.5% 7% 3.5%;
+    
+    background-color: #ffffff; /* Color of the content area */
+    width: 93%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+/****************************************************************************************************/
+                                            /* HEADER */
+/****************************************************************************************************/
+header{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#logo{
+    height: 10vw;
+    max-height: 90px;
+    margin-left: 1%;
+}
+
+#headerAccount{
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    margin-right: 5vw;
+    height: 4vw;
+    max-height: 35px;
+}
+#headerAccount:link, #headerAccount:visited{
+    text-decoration: none;
+    color: black;
+}
+#headerAccount:hover{
+    color: white;
+    background-color: black;
+}
+
+    #headerAccount p {
+        align-self: center;
+        padding-left: 1.5vw;
+        padding-right: 0.5vw;
+        font-size: 0.8em;
+    }
+
+    #myAccountImg{
+        margin-left: 0.5vw;
+        height: 3vw;
+        max-height: 30px;
+    }
+
+
+nav{
+    width: 100%;
+}
+nav a:link, nav a:visited{
+    text-decoration: none;
+    color: initial;
+}
+
+#nav_ul{
+    display: flex;
+    justify-content: flex-start;
+    background-color: #de2226;
+    height: 10vw;
+    max-height: 96px;
+}
+.nav_li:hover{
+    background-color: #ffffff;
+}
+
+.nav_li:nth-child(1){
+    background-color: #ffffff;
+}
+
+.nav_li{ /* Applies to all li's in the header */
+    margin: 2vw .5vw 0 .5vw;
+    padding: 1vw .5vw 0 .5vw;
+    flex-basis: 10%;
+    font-size: 3vw;
+}
+
+/****************************************************************************************************/
+                                        /* MAIN CONTENT */
+/****************************************************************************************************/
+
+/*****************
+Home
+*****************/
+
+indexMain{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 3%
+}
+
+h1{
+    font-size: 2.02em;
+    margin-left: 1vw;
+}
+
+/************************ Hero **************************/
+
+#rocket{
+    position: relative;
+}
+
+#rocketImg{
+    width: 100%;
+}
+
+#rocket ul{
+    /* padding-bottom: 10vw; */
+    font-size: 0.75em;
+    color: #990033;
+    background-color: rgba(255, 255, 255, .5);
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2% 1% 0 1%;
+    width: 50%;
+}
+
+#rocket li{
+    padding: 1% 0;
+}
+#rocket h2{
+    font-size: 1.4em;
+}
+
+#rocket ul img{
+    width: 100%;
+}
+
+/************************ Reviews ****************************/
+
+#reviews ul {
+    list-style: disc;
+    margin: 16px 0px;
+    padding-left: 40px;
+}
+
+/************************* Recipes ***************************/
+
+#recipes ul{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+#recipes li{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 48%;
+    text-align: center;
+}
+
+#recipes li img{
+    width: 40%;
+    padding: 0 29% 5% 29%;
+    background-color: lightgray;
+}
+
+#recipes li a{
+    padding: 5px 0px;
+}
+
+/*****************
+Login & Registration
+*****************/
+#loginMain, #registrationMain{
+    display: flex;
+    flex-flow: column;
+}
+
+#createAccount{
+    background-color:#de2226;
+    padding: 3vw;
+    margin: 0.5vw 1vw 1vw 1vw;
+    text-align: center;
+}
+#loginMain h2{
+    font-size: 1.5em;
+    margin: 0 0 0 1vw;
+}
+
+#loginForm, #registrationForm{
+    display: flex;
+    flex-direction: column;
+    margin: 2vw;
+    
+}
+
+#loginForm label, #registrationForm label{
+    font-size: 1.5em;
+}
+    #loginForm input:not([type="submit"])
+   ,#registrationForm input:not([type="submit"]){
+        margin-bottom: 1vw;
+        font-size: 1.25em;
+        width: 50vw; /* Large @m changes to 33vw */
+    }
+    #loginForm [type="submit"]
+   ,#registrationForm [type="submit"]
+   ,#createAccount{
+        font-size: 1.8em;
+        background-color:#de2226;
+        color: #ffffff;
+        width: 33vw;
+        min-width: 125px;
+    }
+    #loginForm p, #registrationForm p{
+        font-style: italic;
+    }
+
+/*****************
+Registration
+*****************/
+#registrationMain{
+    
+}
+/****************************************************************************************************/
+                                            /* FOOTER */
+/****************************************************************************************************/
+footer{
+    font-size: 2.6vw;
+    text-align: center;
+}
+#footerList{
+    background-color: rgba(0, 0, 0, 0.35);
+    padding: 10px 0 10px 0; /* Gives the top and bottom some space */
+    display: flex; /* So I can edit the positioning more easily. */
+    flex-flow: column;
+    
+}
+/****************************************************************************************************/
+                                        /* MEDIA QUERIES*/
+/****************************************************************************************************/
+@media (min-width: 41.67em) {
+    #rocket li{
+        font-size: 150%;
+    }
+    h1{
+        font-size: 275%;
+    }
+    footer{
+        font-size: 1em;
+    }
+    #headerAccount p {
+        font-size: 1em;
+    }
+    #recipes li a{
+    padding: 10px 0px;
+}
+}
+@media (min-width: 60em){
+    /* Whatever attributes for desktop size */
+    #floatFrame{
+        max-width: 877px;
+    }
+    .nav_li{
+        font-size: 28.77px;
+        margin: 21.5px 5.3px 0 5.3px;
+        padding: 10.7px 5.3px 0 5.3px;
+    }
+    #rocket ul{
+        background-color: rgba(255, 255, 255, 0);
+    }
+    #loginForm input:not([type="submit"])
+   ,#registrationForm input:not([type="submit"]){
+        width: 33vw; /* Large @m changes to 33vw */
+    }
+
+}
