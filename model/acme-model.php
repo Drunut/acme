@@ -6,7 +6,7 @@ function getCategories(){
 $db = acmeConnect();
 
 // The SQL statement to be used with the database
-$sql = 'SELECT categoryName FROM categories ORDER BY categoryName ASC';
+$sql = 'SELECT categoryName, categoryId FROM categories ORDER BY categoryName ASC';
 
 // The next line creates the prepared statement using the acme connection
 $stmt = $db->prepare($sql);
