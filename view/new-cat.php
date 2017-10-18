@@ -1,8 +1,36 @@
-<?php
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+        <title>Acme</title>
+        <?php include "common/head.php" ?>
+    </head>
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    <body>
+      <div id="floatFrame">
+        <header>
+            <img id="logo" src="images/site/logo.gif" alt="Acme Inc. Logo">
+            <div id="headerAccountDiv">
+                <img id="myAccountImg" src="images/site/account.gif" alt="My Account">
+                <p>My Account</p>
+            </div>
+            <nav>
+                <?php
+                    // include "common/nav.php"
+                    echo $navList;
+                ?>
+            </nav>
+        </header>
 
+        <main id="indexMain">
+            <h1>Create New Category</h1>
+        </main>
+
+        <footer>
+            <?php include "common/footer.php"?>
+        </footer>
+      </div>
+    </body>
+
+
+
+</html>
