@@ -21,7 +21,7 @@
             </nav>
         </header>
 
-        <main id="indexMain">
+        <main class="indexMain">
             <h1>Template Page</h1>
         </main>
 

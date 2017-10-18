@@ -18,7 +18,7 @@
             </nav>
         </header>
 
-        <main id="indexMain">
+        <main class="indexMain">
             <h1>The Server experienced an Error</h1>
         </main>
 

@@ -18,7 +18,7 @@
             </nav>
         </header>
 
-        <main id="indexMain">
+        <main class="indexMain">
             <h1>Welcome to Acme!</h1>
             <section id="rocket">
                 <img id="rocketImg" src="images/site/rocketfeature.jpg" alt="Rocket Responsibly">

@@ -21,7 +21,7 @@
             </nav>
         </header>
 
-        <main id="indexMain">
+        <main class="indexMain">
             <h1>New Category</h1>
         </main>
 
