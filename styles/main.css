@@ -225,24 +225,22 @@ Login & Registration
     margin: 0 0 0 1vw;
 }
 
-#loginForm, #registrationForm{
+form{
     display: flex;
     flex-direction: column;
     margin: 2vw;
     
 }
 
-#loginForm label, #registrationForm label{
+form label, form label{
     font-size: 1.5em;
 }
-    #loginForm input:not([type="submit"])
-   ,#registrationForm input:not([type="submit"]){
+    form input:not([type="submit"]){
         margin-bottom: 1vw;
         font-size: 1.25em;
         width: 50vw; /* Large @m changes to 33vw */
     }
-    #loginForm [type="submit"]
-   ,#registrationForm [type="submit"]
+    form [type="submit"]
    ,#createAccount{
         font-size: 1.8em;
         background-color:#de2226;
@@ -250,7 +248,7 @@ Login & Registration
         width: 33vw;
         min-width: 125px;
     }
-    #loginForm p, #registrationForm p{
+    form p{
         font-style: italic;
     }
 
@@ -272,6 +270,12 @@ Product Management
 
 #pMMain p{
     margin-top: 2vw;
+}
+
+#prodSuccess{
+    margin: 2vw 0;
+    color: #de2226;
+    font-size: 2em;
 }
 /****************************************************************************************************/
                                             /* FOOTER */
@@ -320,8 +324,8 @@ footer{
     #rocket ul{
         background-color: rgba(255, 255, 255, 0);
     }
-    #loginForm input:not([type="submit"])
-   ,#registrationForm input:not([type="submit"]){
+    form input:not([type="submit"])
+   ,form input:not([type="submit"]){
         width: 33vw; /* Large @m changes to 33vw */
     }
 

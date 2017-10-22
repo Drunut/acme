@@ -23,6 +23,17 @@
 
         <main class="indexMain">
             <h1>New Category</h1>
+            <p>Add a new category of products below</p>
+            <form action="/acme/products/index.php" id="categoryForm" method="post">
+                
+                <label for="categoryName">New Category Name</label>
+                <input type="text" id="categoryName" name="categoryName" required>
+                    
+                
+                <input type="submit" value="Submit">
+                
+                
+            </form>
         </main>
 
         <footer>

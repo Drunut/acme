@@ -23,7 +23,7 @@ foreach ($categories as $category) {
 $navList .= '</ul>';
 
 // Build a dropdown of categories for new-prod.php
-$catList = '<select name="catListDropDown">';
+$catList = '<select name="catListDropDown" form="productForm">';
 foreach ($categories as $category) {
     $catList .= "<option value='$category[categoryId]'>$category[categoryName]</option>";
 }
@@ -34,6 +34,32 @@ $catList .= '</select>';
 
 ////////////////////////////////////////////////////////////////////////////////
 // Page Control Logic
+
+
+$formAction = filter_input_array(INPUT_POST);
+$formArray;
+if (!isset($prodSuccess)){
+ $prodSuccess = '';
+}
+
+switch (count($formAction)) {
+	case '1':
+                addCategory($formAction['categoryName']);
+                header( "Location: /acme/products/index.php" );
+		break;
+	case '13':
+            try {
+                extract($formAction);
+		addProduct( $catListDropDown, $productName, $productDescription, $productImage, $productThumbnail, $productPrice, $productStock, $productSize, $productWeight, $productLocation, $productStyle, $productVendor );
+		$prodSuccess = "<h2 id='prodSuccess'>Congratulations, ".$productName." was successfully added.</h2>";
+            } catch (Exception $prodEx) {
+                $prodSuccess = "<h2 id='prodSuccess'> Submission Error</h2>";
+            }
+	default:
+}
+
+
+
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL){
  $action = filter_input(INPUT_GET, 'action');
@@ -46,6 +72,6 @@ switch ($action) {
 		include "../view/new-prod.php";
 		break;
 	default:
-		include "../view/prod-mgmt.php";
+                include "../view/prod-mgmt.php";
 }
 ////////////////////////////////////////////////////////////////////////////////
