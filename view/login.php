@@ -21,6 +21,9 @@
         <main id="loginMain">
             <h1>Acme Login</h1>
             <form action="action.php" id="loginForm" method="post">
+                <?php // Putting the message in the form because it's more syntactically significant, but mostly looks better.
+                    if (isset($message)){ echo $message; }
+                ?>
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email">
                 
