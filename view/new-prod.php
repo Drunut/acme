@@ -24,7 +24,7 @@
         <main class="indexMain">
             <h1>New Product</h1>
             <?php // Checking to see if $message is already set before we do this.
-                    if (isset($prodSuccess)){ echo $prodSuccess; }
+                    if (isset($message)){ echo $message; }
                 ?>
             <p>Add a new Product below. All fields are required!</p>
             <form action="/acme/products/index.php" id="productForm" method="post">
@@ -32,37 +32,38 @@
                 <label for="catListDropDown">Category</label>
                 <?php echo $catList; ?>
                 <label for="productName">Product Name</label>
-                <input type="text" id="productName" name="productName" required>
+                <!-- Added the NOT isset so that, if the outcome is successful, it won't re-populate the fields -->
+                <input type="text" id="productName" name="productName" required <?php if(isset($productName) && !isset($prodOutcome)){echo "value='$productName'";} ?> >
                 
                 <label for="productDescription">Product Description</label>
-                <textarea id="productDescription" name="productDescription" rows="4" required></textarea>
+                <textarea id="productDescription" name="productDescription" rows="4" required <?php if(isset($productDescription) && !isset($prodOutcome)){echo "value='$productDescription'";} ?> ></textarea>
                 
                 <label for="productImage">Product Image (path to image)</label>
-                <input type="text" id="productImage" name="productImage" required>
+                <input type="text" id="productImage" name="productImage" required <?php if(isset($productImage) && !isset($prodOutcome)){echo "value='$productImage'";} ?> >
                 
                 <label for="productThumbnail">Product Thumbnail (path to image)</label>
-                <input type="text" id="productThumbnail" name="productThumbnail" required>
+                <input type="text" id="productThumbnail" name="productThumbnail" required <?php if(isset($productThumbnail) && !isset($prodOutcome)){echo "value='$productThumbnail'";} ?> >
                 
                 <label for="productPrice">Product Price</label>
-                <input type="number" id="productPrice" name="productPrice" required>
+                <input type="number" id="productPrice" name="productPrice" required <?php if(isset($productPrice) && !isset($prodOutcome)){echo "value='$productPrice'";} ?> >
                 
                 <label for="productStock">Amount in Stock</label>
-                <input type="number" id="productStock" name="productStock" required>
+                <input type="number" id="productStock" name="productStock" required <?php if(isset($productStock) && !isset($prodOutcome)){echo "value='$productStock'";} ?> >
                 
                 <label for="productSize">Product Size</label>
-                <input type="number" id="productSize" name="productSize" required>
+                <input type="number" id="productSize" name="productSize" required <?php if(isset($productSize) && !isset($prodOutcome)){echo "value='$productSize'";} ?> >
                 
                 <label for="productWeight">Product Weight</label>
-                <input type="number" id="productWeight" name="productWeight" required>
+                <input type="number" id="productWeight" name="productWeight" required <?php if(isset($productWeight) && !isset($prodOutcome)){echo "value='$productWeight'";} ?> >
                 
                 <label for="productLocation">Product Location</label>
-                <input type="text" id="productLocation" name="productLocation" required>
+                <input type="text" id="productLocation" name="productLocation" required <?php if(isset($productLocation) && !isset($prodOutcome)){echo "value='$productLocation'";} ?> >
                 
                 <label for="productStyle">Product Style</label>
-                <input type="text" id="productStyle" name="productStyle" required>
+                <input type="text" id="productStyle" name="productStyle" required <?php if(isset($productStyle) && !isset($prodOutcome)){echo "value='$productStyle'";} ?> >
                 
                 <label for="productVendor">Product Vendor</label>
-                <input type="text" id="productVendor" name="productVendor" required>
+                <input type="text" id="productVendor" name="productVendor" required <?php if(isset($product) && !isset($prodOutcome)){echo "value='$product'";} ?> >
                 <input type="hidden" name="action" value="createProduct">
                 
                 <input type="submit" value="Submit">
