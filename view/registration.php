@@ -20,23 +20,23 @@
 
         <main id="registrationMain">
             <h1>Acme Registration</h1>
-            <form action="/acme/accounts/index.php" id="registrationForm" method="post">
                 <?php // Checking to see if $message is already set before we do this.
                     if (isset($message)){ echo $message; }
                 ?>
+            <form action="/acme/accounts/index.php" id="registrationForm" method="post">
                 <label for="clientFirstName">First name*</label>
-                <input type="text" id="clientFirstName" name="clientFirstName">
+                <input type="text" id="clientFirstName" name="clientFirstName" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
                 <label for="clientLastName">Last name*</label>
-                <input type="text" id="clientLastName" name="clientLastName">
+                <input type="text" id="clientLastName" name="clientLastName" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
                 
                 <label for="clientEmail">Email Address*</label>
-                <input type="email" id='clientEmail' name="clientEmail">
+                <input type="email" id='clientEmail' name="clientEmail" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
                 <label for="clientPassword">Password*</label>
-                <p id="passwordReq">8-16 characters in length, at least one upper and lower case letter.</p>
-                <input type="password" class="pwdbtn" name="clientPassword" pattern="[\w]{8,16}" >
+                <p id="passwordReq">8+ characters in length, with at least 1 number, 1 capital letter and 1 special character</p>
+                <input type="password" class="pwdbtn" name="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
 				<!-- Add the action name - value pair -->
                     <input type="hidden" name="action" value="register">
-                <p>* Required Fields</p>
+                <p>* All Fields Required</p>
                 
                 <input type="submit" value="Register">
                 
