@@ -27,7 +27,8 @@
             <form action="/acme/products/index.php" id="categoryForm" method="post">
                 
                 <label for="categoryName">New Category Name</label>
-                <input type="text" id="categoryName" name="categoryName" required>
+                <input type="text" id="categoryName" name="categoryName">
+                <input type="hidden" name="action" value="createCategory">
                     
                 
                 <input type="submit" value="Submit">

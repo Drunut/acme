@@ -23,7 +23,9 @@
 
         <main class="indexMain">
             <h1>New Product</h1>
-            <?php echo $prodSuccess ?>
+            <?php // Checking to see if $message is already set before we do this.
+                    if (isset($prodSuccess)){ echo $prodSuccess; }
+                ?>
             <p>Add a new Product below. All fields are required!</p>
             <form action="/acme/products/index.php" id="productForm" method="post">
                 
@@ -61,7 +63,7 @@
                 
                 <label for="productVendor">Product Vendor</label>
                 <input type="text" id="productVendor" name="productVendor" required>
-                <input type="hidden" name="action" value="newProduct">
+                <input type="hidden" name="action" value="createProduct">
                 
                 <input type="submit" value="Submit">
                 

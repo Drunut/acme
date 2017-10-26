@@ -33,31 +33,7 @@ $catList .= '</select>';
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Page Control Logic
-
-
-$formAction = filter_input_array(INPUT_POST);
-$formArray;
-if (!isset($prodSuccess)){
- $prodSuccess = '';
-}
-
-switch (count($formAction)) {
-	case '1':
-                addCategory($formAction['categoryName']);
-                header( "Location: /acme/products/index.php" );
-		break;
-	case '13':
-            try {
-                extract($formAction);
-		addProduct( $catListDropDown, $productName, $productDescription, $productImage, $productThumbnail, $productPrice, $productStock, $productSize, $productWeight, $productLocation, $productStyle, $productVendor );
-		$prodSuccess = "<h2 id='prodSuccess'>Congratulations, ".$productName." was successfully added.</h2>";
-            } catch (Exception $prodEx) {
-                $prodSuccess = "<h2 id='prodSuccess'> Submission Error</h2>";
-            }
-	default:
-}
-
+// Page Control and Form Submission Logic
 
 
 $action = filter_input(INPUT_POST, 'action');
@@ -65,13 +41,31 @@ if ($action == NULL){
  $action = filter_input(INPUT_GET, 'action');
 }
 switch ($action) {
+        //Page Navigation Cases
 	case 'newCategory':
-		include "../view/new-cat.php";
-		break;
+            include "../view/new-cat.php";
+            break;
 	case 'newProduct':
-		include "../view/new-prod.php";
-		break;
+            include "../view/new-prod.php";
+            break;
+        // Form Submission Cases
+        case 'createProduct':
+            try {
+                //There are a TON of keys here so it's cleaner to filter the whole POST array, then extract
+                //$formAction = array_filter($_POST, trim());
+                $formAction = filter_input_array(INPUT_POST);
+                extract($formAction);
+		addProduct( $catListDropDown, $productName, $productDescription, $productImage, $productThumbnail, $productPrice, $productStock, $productSize, $productWeight, $productLocation, $productStyle, $productVendor );
+		$message = "<h2 id='message'>Congratulations, ".$productName." was successfully added.</h2>";
+            } catch (Exception $prodEx) {
+                $message = "<h2 id='message'> Submission Error</h2>";
+            }
+            break;
+        case 'createCategory':
+            addCategory( filter_input(INPUT_POST, 'categoryName') );
+            header( "Location: /acme/products/index.php" );
+            break;
 	default:
-                include "../view/prod-mgmt.php";
+            include "../view/prod-mgmt.php";
 }
 ////////////////////////////////////////////////////////////////////////////////
