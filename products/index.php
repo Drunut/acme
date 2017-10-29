@@ -12,17 +12,9 @@ require_once '../library/functions.php';
 
 
 ////////////////////////////////////////////////////////////////////////////////
-// Create list of Categories for use in the navbar and new-prod View's dropdown
+// Pass list of Categories to createNav, to generate the navigation
 $categories = getCategories();
-
-// Build a navigation bar
-$navList = '<ul id="nav_ul">';
-$navList .= "<li class='nav_li'><a href='/acme/index.php' title='View the Acme home page'>Home</a></li>";
-foreach ($categories as $category) {
-    $navList .= "<li class='nav_li'><a href='/acme/index.php?action=$category[categoryName]' title='View our $category[categoryName] product line'>$category[categoryName]</a></li>";
-}
-$navList .= '</ul>';
-
+$navList = createNav($categories);
 
 ////////////////////////////////////////////////////////////////////////////////
 

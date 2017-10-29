@@ -3,6 +3,8 @@
 require_once 'library/connections.php';
 // Get the acme model for use as needed
 require_once 'model/acme-model.php';
+// So we can create our navList
+require_once 'library/functions.php';
 $categories = getCategories();
 
 
@@ -11,12 +13,7 @@ $headerAccount .= "<img id='myAccountImg' src='/acme/images/site/account.gif' al
 $headerAccount  .= "<p>My Account</p></a>";
 
 // Build a navigation bar using the $categories array
-$navList = '<ul id="nav_ul">';
-$navList .= "<li class='nav_li'><a href='/acme/index.php' title='View the Acme home page'>Home</a></li>";
-foreach ($categories as $category) {
-$navList .= "<li class='nav_li'><a href='/acme/index.php?action=$category[categoryName]' title='View our $category[categoryName] product line'>$category[categoryName]</a></li>";
-}
-$navList .= '</ul>';
+$navList = createNav($categories);
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL){
