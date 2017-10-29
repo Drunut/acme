@@ -7,6 +7,7 @@
 require_once '../library/connections.php';
 require_once '../model/acme-model.php';
 require_once '../model/products-model.php';
+require_once '../library/functions.php';
 
 
 
@@ -23,11 +24,11 @@ foreach ($categories as $category) {
 $navList .= '</ul>';
 
 // Build a dropdown of categories for new-prod.php
-$catList = '<select name="catListDropDown" form="productForm">';
-foreach ($categories as $category) {
-    $catList .= "<option value='$category[categoryId]'>$category[categoryName]</option>";
-}
-$catList .= '</select>';
+//$catList = '<select name="catListDropDown" form="productForm">';
+//foreach ($categories as $category) {
+//    $catList .= "<option value='$category[categoryId]'>$category[categoryName]</option>";
+//}
+//$catList .= '</select>';
 ////////////////////////////////////////////////////////////////////////////////
 
 
@@ -51,23 +52,28 @@ switch ($action) {
         
         // Form Submission Cases
         case 'createProduct':
-            //There are a TON of keys here so it's cleaner to filter the whole POST array
-            $formAction = filter_input_array(INPUT_POST);
-            // Extract the array into variables
-            extract($formAction);
-            // Check the array if there are any empty fields.
-            // We extract before this so we can replace filled-in fields
-            foreach($formAction as $formItem){
-                if(empty($formItem)){
-                    $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
-                    include '../view/new-prod.php';
-                    exit;
-                }
+            //Individual assignment and filters instead of an array with filters as per assignment
+            $catListDropDown    = filter_input( INPUT_POST, 'catListDropDown',    FILTER_SANITIZE_STRING );
+            $productName        = filter_input( INPUT_POST, 'productName',        FILTER_SANITIZE_STRING );
+            $productDescription = filter_input( INPUT_POST, 'productDescription', FILTER_SANITIZE_STRING );
+            $productImage       = filter_input( INPUT_POST, 'productImage',       FILTER_SANITIZE_STRING );
+            $productThumbnail   = filter_input( INPUT_POST, 'productThumbnail',   FILTER_SANITIZE_STRING );
+            $productPrice       = filter_input( INPUT_POST, 'productPrice',       FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $productStock       = filter_input( INPUT_POST, 'productStock',       FILTER_SANITIZE_NUMBER_INT );
+            $productSize        = filter_input( INPUT_POST, 'productSize',        FILTER_SANITIZE_NUMBER_INT );
+            $productWeight      = filter_input( INPUT_POST, 'productWeight',      FILTER_SANITIZE_NUMBER_INT );
+            $productLocation    = filter_input( INPUT_POST, 'productLocation',    FILTER_SANITIZE_STRING );
+            $productStyle       = filter_input( INPUT_POST, 'productStyle',       FILTER_SANITIZE_STRING );
+            $productVendor      = filter_input( INPUT_POST, 'productVendor',      FILTER_SANITIZE_STRING );
+            
+            
+            if( empty($catListDropDown)      || empty($productName)     || empty($productDescription) || empty($productImage)    ||
+                    empty($productThumbnail) || empty($productPrice)    || empty($productStock)       || empty($productSize)     ||
+                    empty($productWeight)    || empty($productLocation) || empty($productStyle)       || empty($productVendor)     ) {
+                $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
+                include '../view/new-prod.php';
+                exit;
             }
-//             empty($catListDropDown) || empty($productName) || empty($productDescription) ||
-//             empty($productImage) || empty($productThumbnail) || empty($productPrice) ||
-//             empty($productStock) || empty($productSize) || empty($productWeight) ||
-//             empty($productLocation) || empty($productStyle) || empty($productVendor)
             // Send Product Data to the Model
             $prodOutcome =  addProduct( $catListDropDown, $productName, $productDescription
                                       , $productImage, $productThumbnail, $productPrice

@@ -1,3 +1,16 @@
+<?php
+    // Build a dropdown of categories for new-prod.php
+    $catList = '<select name="catListDropDown" form="productForm">';
+    foreach ($categories as $category) {
+        $catList .= "<option value='$category[categoryId]'";
+        // Repopulate drop-down if it was selected previously
+        if (isset($catListDropDown) && ($category['categoryId'] == $catListDropDown) ) {
+            $catList .= " selected";
+        }
+        $catList .= ">$category[categoryName]</option>";
+    }
+    $catList .= '</select>';
+?>
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
@@ -36,7 +49,7 @@
                 <input type="text" id="productName" name="productName" required <?php if(isset($productName) && !isset($prodOutcome)){echo "value='$productName'";} ?> >
                 
                 <label for="productDescription">Product Description</label>
-                <textarea id="productDescription" name="productDescription" rows="4" required <?php if(isset($productDescription) && !isset($prodOutcome)){echo "value='$productDescription'";} ?> ></textarea>
+                <textarea id="productDescription" name="productDescription" rows="4" required><?php if(isset($productDescription) && !isset($prodOutcome)){echo $productDescription;} ?></textarea>
                 
                 <label for="productImage">Product Image (path to image)</label>
                 <input type="text" id="productImage" name="productImage" required <?php if(isset($productImage) && !isset($prodOutcome)){echo "value='$productImage'";} ?> >
