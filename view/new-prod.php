@@ -76,7 +76,7 @@
                 <input type="text" id="productStyle" name="productStyle" required <?php if(isset($productStyle) && !isset($prodOutcome)){echo "value='$productStyle'";} ?> >
                 
                 <label for="productVendor">Product Vendor</label>
-                <input type="text" id="productVendor" name="productVendor" required <?php if(isset($product) && !isset($prodOutcome)){echo "value='$product'";} ?> >
+                <input type="text" id="productVendor" name="productVendor" required <?php if(isset($productVendor) && !isset($prodOutcome)){echo "value='$productVendor'";} ?> >
                 <input type="hidden" name="action" value="createProduct">
                 
                 <input type="submit" value="Submit">
