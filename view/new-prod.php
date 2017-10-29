@@ -1,6 +1,6 @@
 <?php
     // Build a dropdown of categories for new-prod.php
-    $catList = '<select name="catListDropDown" form="productForm">';
+    $catList = '<select id="catListDropDown" name="catListDropDown" form="productForm">';
     foreach ($categories as $category) {
         $catList .= "<option value='$category[categoryId]'";
         // Repopulate drop-down if it was selected previously
