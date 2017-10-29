@@ -23,12 +23,7 @@ foreach ($categories as $category) {
 }
 $navList .= '</ul>';
 
-// Build a dropdown of categories for new-prod.php
-//$catList = '<select name="catListDropDown" form="productForm">';
-//foreach ($categories as $category) {
-//    $catList .= "<option value='$category[categoryId]'>$category[categoryName]</option>";
-//}
-//$catList .= '</select>';
+
 ////////////////////////////////////////////////////////////////////////////////
 
 
