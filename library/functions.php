@@ -1,7 +1,7 @@
 <?php
 
 function checkEmail($clientEmail){
-    $valEmail = filter_input($clientEmail, FILTER_VALIDATE_EMAIL);
+    $valEmail = filter_input(INPUT_POST, $clientEmail, FILTER_VALIDATE_EMAIL);
     return $valEmail;
 }
 

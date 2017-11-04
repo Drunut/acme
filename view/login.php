@@ -31,7 +31,7 @@
                 <p id="passwordReq">8+ characters in length, with at least 1 number, 1 capital letter and 1 special character</p>
                 <input type="password" class="pwdbtn" name="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
                 
-                <input type="hidden" name="action" value="submitLogin"
+                <input type="hidden" name="action" value="submitLogin">
                 <input type="submit" value="Submit">
             </form>
             <h2>Not a Member?</h2>
