@@ -20,7 +20,7 @@
         <header>
             <img id="logo" src="../images/site/logo.gif" alt="Acme Inc. Logo">
             <?php
-                  echo $headerAccount
+                  echo createHeaderAccount(true); //Re-running it here, because since we're just including it in the login code we need to re-check whether we're logged in.
             ?>
             <nav>
                 <?php

@@ -109,11 +109,15 @@ switch ($action) {
             array_pop($clientData);
             // Store the array into the session
             $_SESSION['clientData'] = $clientData;
+            //Add in the cookie
+            setcookie('firstname', $clientData['clientFirstname'], strtotime('+1 year'), '/');
             // Send them to the admin view
             include '../view/admin.php';
             exit;
         case 'logout':
             session_destroy();
+            // TAKE AWAY THEIR COOKIES because I am evil
+            setcookie('firstname', '' , time()-3600, '/');
             header('Location: /acme/index.php');
 	default:
 		include "../view/500.php";
