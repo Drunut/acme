@@ -37,9 +37,16 @@ switch ($action) {
                 $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
                 $clientEmail = checkEmail($clientEmail);
                 $checkPassword = checkPassword($clientPassword); // 1/0 == T/F
+                // Check if the email is already registered
+                if (checkDupe($clientEmail)){
+                    $message = "<h2 id='message'>That email address has already been registered. Try Logging in.</h2>";
+                    include '../view/login.php';
+                    exit;
+                }
+                
                 // Check for missing data
                 if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)) {
-                    $message = '<p>Please provide information for all empty form fields.</p>';
+                    $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
                     include '../view/registration.php';
                     exit;
                 }
@@ -48,11 +55,11 @@ switch ($action) {
                 $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
                 $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
                 if($regOutcome === 1) {
-                    $message = "<p>Thanks for registering $clientFirstname. Please use your email and password to login.</p>";
+                    $message = "<h2 id='message'>Thanks for registering $clientFirstname. Please use your email and password to login.</h2>";
                     include '../view/login.php';
                     exit;
                 } else {
-                    $message = "<p>Sorry $clientFirstname, but the registration failed. Please try again.</p>";
+                    $message = "<h2 id='message'>Sorry $clientFirstname, but the registration failed. Please try again.</h2>";
                     include '../view/registration.php';
                     exit;
                 }
@@ -63,8 +70,8 @@ switch ($action) {
             $clientEmail = checkEmail($clientEmail);
             $checkPassword = checkPassword($clientPassword); // 1/0 == T/F
             if(empty($clientEmail) || empty($checkPassword)) {
-                    $message = '<p>Please provide information for all empty form fields.</p>';
-                    include '../view/registration.php';
+                    $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
+                    include '../view/login.php';
                     exit;
                 }
             break;

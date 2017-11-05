@@ -23,7 +23,7 @@
                 <?php // Putting the message in the form because it's more syntactically significant, but mostly looks better.
                     if (isset($message)){ echo $message; }
                 ?>
-            <form action="action.php" id="loginForm" method="post">
+            <form action="/acme/accounts/index.php" id="loginForm" method="post">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" <?php if(isset($clientEmail)){echo "value='$clientEmail'";} ?> required>
                 
@@ -32,7 +32,7 @@
                 <input type="password" class="pwdbtn" name="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
                 
                 <input type="hidden" name="action" value="submitLogin">
-                <input type="submit" value="Submit">
+                <input type="submit" value="Login">
             </form>
             <h2>Not a Member?</h2>
             <a href="/acme/accounts/index.php?action=registration" id="createAccount">Create an Account</a>

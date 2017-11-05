@@ -37,5 +37,22 @@ function regClient($clientFirstname, $clientLastname, $clientEmail, $clientPassw
     return $rowsChanged;
 }
 
+#Check for existing email address
+function checkDupe($clientEmail){
+    $db = acmeConnect();
+    $sql = 'SELECT clientEmail FROM clients WHERE clientEmail = :clientEmail';
+    $stmt = $db->prepare($sql);
+    $stmt->bindValue(':clientEmail', $clientEmail, PDO::PARAM_STR);
+    
+    $stmt->execute();
+    $match = $stmt->fetch(PDO::FETCH_NUM);
+    $stmt->closeCursor();
+    
+    if(empty($match)){
+        return 0;
+    } else {
+        return 1;
+    }
+}
 
 ?>
