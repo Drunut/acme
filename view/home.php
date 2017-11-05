@@ -9,7 +9,11 @@
       <div id="floatFrame">
         <header>
             <img id="logo" src="images/site/logo.gif" alt="Acme Inc. Logo">
-            <?php echo $headerAccount ?>
+            <?php if(isset($cookieFirstname)){
+                    echo "<span>Welcome $cookieFirstname</span>";
+                  };
+                  echo $headerAccount //iirc you had us put the header account stuff in the controller too, so it's over in \acme\index.php
+            ?>
             <nav>
                 <?php
                     // include "common/nav.php"

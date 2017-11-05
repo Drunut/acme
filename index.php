@@ -19,6 +19,10 @@ $action = filter_input(INPUT_POST, 'action');
 if ($action == NULL){
  $action = filter_input(INPUT_GET, 'action');
 }
+// Check for Cookie
+if(isset($_COOKIE['firstname'])){
+  $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+}
 
 
 switch ($action){

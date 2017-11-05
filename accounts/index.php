@@ -55,6 +55,8 @@ switch ($action) {
                 $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
                 $regOutcome = regClient($clientFirstname, $clientLastname, $clientEmail, $hashedPassword);
                 if($regOutcome === 1) {
+                    // Set Cookies
+                    setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
                     $message = "<h2 id='message'>Thanks for registering $clientFirstname. Please use your email and password to login.</h2>";
                     include '../view/login.php';
                     exit;
