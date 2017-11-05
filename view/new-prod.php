@@ -1,4 +1,7 @@
 <?php
+    if(!isset($_SESSION['loggedin']) && !($clientData['clientLevel'] > 1)){
+        header('Location: /acme/index.php');
+    }
     // Build a dropdown of categories for new-prod.php
     $catList = '<select id="catListDropDown" name="catListDropDown" form="productForm">';
     foreach ($categories as $category) {
