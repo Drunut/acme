@@ -25,7 +25,7 @@
                 ?>
             <form action="action.php" id="loginForm" method="post">
                 <label for="email">Email Address</label>
-                <input type="email" id="email" name="email" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
+                <input type="email" id="email" name="email" <?php if(isset($clientEmail)){echo "value='$clientEmail'";} ?> required>
                 
                 <label for="password">Password</label>
                 <p id="passwordReq">8+ characters in length, with at least 1 number, 1 capital letter and 1 special character</p>

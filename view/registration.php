@@ -33,7 +33,7 @@
                 <input type="email" id='clientEmail' name="clientEmail" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
                 <label for="clientPassword">Password*</label>
                 <p id="passwordReq">8+ characters in length, with at least 1 number, 1 capital letter and 1 special character</p>
-                <input type="password" class="pwdbtn" name="password" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
+                <input type="password" class="pwdbtn" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
 				<!-- Add the action name - value pair -->
                     <input type="hidden" name="action" value="register">
                 <p>* All Fields Required</p>

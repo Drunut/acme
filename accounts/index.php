@@ -31,8 +31,8 @@ switch ($action) {
 		break;
 	case 'register':
                 // Filter and store the data
-                $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
-                $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+                $clientFirstname = filter_input(INPUT_POST, 'clientFirstName', FILTER_SANITIZE_STRING);
+                $clientLastname = filter_input(INPUT_POST, 'clientLastName', FILTER_SANITIZE_STRING);
                 $clientEmail = filter_input(INPUT_POST, 'clientEmail');
                 $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
                 $clientEmail = checkEmail($clientEmail);
