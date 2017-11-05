@@ -9,10 +9,9 @@
       <div id="floatFrame">
         <header>
             <img id="logo" src="../images/site/logo.gif" alt="Acme Inc. Logo">
-            <div id="headerAccountDiv">
-                <img id="myAccountImg" src="../images/site/account.gif" alt="My Account">
-                <p>My Account</p>
-            </div>
+            <?php
+                  echo $headerAccount
+            ?>
             <nav>
                 <?php
                     // include "common/nav.php"

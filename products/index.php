@@ -12,7 +12,11 @@ require_once '../model/acme-model.php';
 require_once '../model/products-model.php';
 require_once '../library/functions.php';
 
-
+if(isset($_SESSION['loggedin'])){
+    $headerAccount = createHeaderAccount(true);
+} else {
+    $headerAccount = createHeaderAccount(false);
+}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Pass list of Categories to createNav, to generate the navigation

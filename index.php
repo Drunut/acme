@@ -15,10 +15,11 @@ require_once 'model/acme-model.php';
 require_once 'library/functions.php';
 $categories = getCategories();
 
-
-$headerAccount  = "<a id='headerAccount' href='/acme/accounts/index.php?action=login'>";
-$headerAccount .= "<img id='myAccountImg' src='/acme/images/site/account.gif' alt='My Account'>";
-$headerAccount  .= "<p>My Account</p></a>";
+if(isset($_SESSION['loggedin'])){
+    $headerAccount = createHeaderAccount(true);
+} else {
+    $headerAccount = createHeaderAccount(false);
+}
 
 // Build a navigation bar using the $categories array
 $navList = createNav($categories);

@@ -22,3 +22,17 @@ function createNav($categories){
     $navList .= '</ul>';
     return $navList;
 }
+
+function createHeaderAccount($loggedin){
+    if ($loggedin){
+        $headerAccount  = "<a id='headerAccount' href='/acme/accounts/index.php?action=logout'>";
+        $headerAccount .= "<img id='myAccountImg' src='/acme/images/site/account.gif' alt='My Account'>";
+        $headerAccount  .= "<p>Log Out</p></a>";
+    } else {
+        $headerAccount  = "<a id='headerAccount' href='/acme/accounts/index.php?action=login'>";
+        $headerAccount .= "<img id='myAccountImg' src='/acme/images/site/account.gif' alt='My Account'>";
+        $headerAccount  .= "<p>My Account</p></a>";
+    }
+    
+    return $headerAccount;
+}

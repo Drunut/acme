@@ -13,9 +13,12 @@ require_once '../library/functions.php';
 require_once '../model/acme-model.php';
 $categories = getCategories();
 
-$headerAccount  = "<a id='headerAccount' href='/acme/accounts/index.php?action=login'>";
-$headerAccount .= "<img id='myAccountImg' src='/acme/images/site/account.gif' alt='My Account'>";
-$headerAccount  .= "<p>My Account</p></a>";
+// Modularized the Header stuff since it was getting used across three controllers
+if(isset($_SESSION['loggedin'])){
+    $headerAccount = createHeaderAccount(true);
+} else {
+    $headerAccount = createHeaderAccount(false);
+}
 
 // Build a navigation bar using the $categories array
 $navList = createNav($categories);
@@ -33,6 +36,9 @@ switch ($action) {
 	case 'registration':
 		include "../view/registration.php";
 		break;
+        case 'admin':
+                include "../view/admin.php";
+                break;
 	case 'register':
                 // Filter and store the data
                 $clientFirstname = filter_input(INPUT_POST, 'clientFirstName', FILTER_SANITIZE_STRING);
@@ -71,11 +77,12 @@ switch ($action) {
                 }
                 break;
         case 'submitLogin':
-            $clientEmail = filter_input(INPUT_POST, 'clientEmail', FILTER_SANITIZE_EMAIL);
+            $clientEmail = filter_input(INPUT_POST, 'clientEmail');
             $clientEmail = checkEmail($clientEmail);
             $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
-            $passwordCheck = checkPassword($clientPassword); // 1/0 == T/F
+            $checkPassword = checkPassword($clientPassword); // 1/0 == T/F
             if(empty($clientEmail) || empty($checkPassword)) {
+                    echo "email[".$clientEmail."]"; echo "PassCheck[".$checkPassword."]";
                     $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
                     include '../view/login.php';
                     exit;
@@ -105,6 +112,9 @@ switch ($action) {
             // Send them to the admin view
             include '../view/admin.php';
             exit;
+        case 'logout':
+            session_destroy();
+            header('Location: /acme/index.php');
 	default:
 		include "../view/500.php";
 }
