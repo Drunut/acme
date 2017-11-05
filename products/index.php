@@ -3,6 +3,9 @@
  * Products controller
  */
 
+// Create or access a Session
+session_start();
+
 // Get the database connection file, the acme Model (for the getCategories() function), and the products Model
 require_once '../library/connections.php';
 require_once '../model/acme-model.php';
