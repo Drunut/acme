@@ -183,12 +183,12 @@ switch ($action) {
             $deleteResult =  deleteProduct( $invId );
             // Make sure it changed just one row (the one we added)
             if($deleteResult) {
-                    $message = "<h2 class='message'>Congratulations, ".$productName." was successfully deleted.</h2>";
+                    $message = "<h2 class='message'>Congratulations, ".$invName." was successfully deleted.</h2>";
                     $_SESSION['message'] = $message;
                     header('location: /acme/products/');
                     exit;
                 } else {
-                    $message = "<h2 class='message'>".$productName." delete failed.</h2>";
+                    $message = "<h2 class='message'>".$invName." delete failed.</h2>";
                     $_SESSION['message'] = $message;
                     header('location: /acme/products/');
                     exit;

@@ -50,16 +50,16 @@
                 <!-- Added the NOT isset so that, if the outcome is successful, it won't re-populate the fields -->
                 <input type="text" id="invName" name="invName" readonly
                     <?php
-                        if( isset($invName) ){
-                            echo "value='$invName'";
+                        if( isset($prodInfo['invName']) ){
+                            echo "value=\"".$prodInfo['invName']."\"";
                         }
                     ?>
                 >
                 
                 <label for="invDescription">Product Description</label>
                 <textarea id="invDescription" name="invDescription" rows="4" readonly><?php
-                        if( isset($invDescription) ){
-                            echo $invDescription;
+                        if( isset($prodInfo['invDescription']) ){
+                            echo $prodInfo['invDescription'];
                         }
                     ?></textarea>
                 
