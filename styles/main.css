@@ -272,11 +272,23 @@ Product Management
     margin-top: 2vw;
 }
 
-#message{
-    margin: 2vw 0;
+.message{
+    margin: .5em 0 0 2vw;
     color: #de2226;
     font-size: 2em;
 }
+
+/*********
+Admin Page
+*********/
+#adminUserData, #adminActions{
+    margin: 1em;
+}
+
+#adminModify{
+    margin: 1em 0 .25em 0;
+}
+
 
 /***************************
 Random Garbage Table Styling I shamelessly lifted off w3schools and tweaked

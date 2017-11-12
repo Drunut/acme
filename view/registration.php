@@ -27,10 +27,10 @@
                 <label for="clientFirstName">First name*</label>
                 <input type="text" id="clientFirstName" name="clientFirstName" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
                 <label for="clientLastName">Last name*</label>
-                <input type="text" id="clientLastName" name="clientLastName" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
+                <input type="text" id="clientLastName" name="clientLastName" <?php if(isset($clientLastname)){echo "value='$clientLastname'";} ?> required>
                 
                 <label for="clientEmail">Email Address*</label>
-                <input type="email" id='clientEmail' name="clientEmail" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
+                <input type="email" id='clientEmail' name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";} ?> required>
                 <label for="clientPassword">Password*</label>
                 <p id="passwordReq">8+ characters in length, with at least 1 number, 1 capital letter and 1 special character</p>
                 <input type="password" class="pwdbtn" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>

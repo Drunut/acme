@@ -20,6 +20,10 @@ if(isset($_SESSION['loggedin'])){
     $headerAccount = createHeaderAccount(false);
 }
 
+if(isset($_SESSION['clientData'])){
+    $clientData = $_SESSION['clientData'];
+}
+
 // Build a navigation bar using the $categories array
 $navList = createNav($categories);
 
@@ -39,6 +43,12 @@ switch ($action) {
         case 'admin':
                 include "../view/admin.php";
                 break;
+        case 'modify':
+                include "../view/client-update.php";
+                break;
+            
+            
+            
 	case 'register':
                 // Filter and store the data
                 $clientFirstname = filter_input(INPUT_POST, 'clientFirstName', FILTER_SANITIZE_STRING);
@@ -49,14 +59,14 @@ switch ($action) {
                 $checkPassword = checkPassword($clientPassword); // 1/0 == T/F
                 // Check if the email is already registered
                 if (checkDupe($clientEmail)){
-                    $message = "<h2 id='message'>That email address has already been registered. Try Logging in.</h2>";
+                    $message = "<h2 class='message'>That email address has already been registered. Try Logging in.</h2>";
                     include '../view/login.php';
                     exit;
                 }
                 
                 // Check for missing data
                 if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail) || empty($checkPassword)) {
-                    $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
+                    $message = "<h2 class='message'>Please provide information for all empty form fields.</h2>";
                     include '../view/registration.php';
                     exit;
                 }
@@ -67,15 +77,17 @@ switch ($action) {
                 if($regOutcome === 1) {
                     // Set Cookies
                     setcookie('firstname', $clientFirstname, strtotime('+1 year'), '/');
-                    $message = "<h2 id='message'>Thanks for registering $clientFirstname. Please use your email and password to login.</h2>";
+                    $message = "<h2 class='message'>Thanks for registering $clientFirstname. Please use your email and password to login.</h2>";
                     include '../view/login.php';
                     exit;
                 } else {
-                    $message = "<h2 id='message'>Sorry $clientFirstname, but the registration failed. Please try again.</h2>";
+                    $message = "<h2 class='message'>Sorry $clientFirstname, but the registration failed. Please try again.</h2>";
                     include '../view/registration.php';
                     exit;
                 }
                 break;
+                
+                
         case 'submitLogin':
             $clientEmail = filter_input(INPUT_POST, 'clientEmail');
             $clientEmail = checkEmail($clientEmail);
@@ -83,7 +95,7 @@ switch ($action) {
             $checkPassword = checkPassword($clientPassword); // 1/0 == T/F
             if(empty($clientEmail) || empty($checkPassword)) {
                     echo "email[".$clientEmail."]"; echo "PassCheck[".$checkPassword."]";
-                    $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
+                    $message = "<h2 class='message'>Please provide information for all empty form fields.</h2>";
                     include '../view/login.php';
                     exit;
                 }
@@ -112,6 +124,7 @@ switch ($action) {
             //Add in the cookie
             setcookie('firstname', $clientData['clientFirstname'], strtotime('+1 year'), '/');
             // Send them to the admin view
+            $message = "<h2 class='message'>You are now logged in</h2>";
             include '../view/admin.php';
             exit;
         case 'logout':
@@ -119,6 +132,83 @@ switch ($action) {
             // TAKE AWAY THEIR COOKIES because I am evil
             setcookie('firstname', '' , time()-3600, '/');
             header('Location: /acme/index.php');
+        break;
+        
+    
+    
+        case 'modifyAccount':
+            // Filter and store the data
+                $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+                $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
+                $clientEmail = filter_input(INPUT_POST, 'clientEmail');
+                $clientEmail = checkEmail($clientEmail);
+                $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+                
+                // Check if the email is already registered
+                
+                if (($clientEmail != $_SESSION['clientData']['clientEmail']) && checkDupe($clientEmail)){
+                    $accMessage = "<h2 id='accMessage' class='message'>That email address has already been registered.</h2>";
+                    include '../view/client-update.php';
+                    exit;
+                }
+                
+                // Check for missing data
+                if(empty($clientFirstname) || empty($clientLastname) || empty($clientEmail)) {
+                    $accMessage = "<h2 id='accMessage' class='message'>Please provide information for all empty form fields.</h2>";
+                    include '../view/client-update.php';
+                    exit;
+                }
+                
+                //Send update data to the model
+                $updateOutcome = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
+                if($updateOutcome === 1) {
+                    $message = "<h2 class='message'>Thank you, $clientFirstname, for updating your information.</h2>";
+                    foreach($_SESSION['clientData'] AS $KEY => $VALUE){$message .= $KEY."_".$VALUE."_|_";}
+                    //Update our session information to the newly updated info
+                    $_SESSION['clientData']['clientFirstName'] = $clientFirstname;
+                    $_SESSION['clientData']['clientLastName'] = $clientLastname;
+                    $_SESSION['clientData']['clientEmail'] = $clientEmail;
+                    $message .= "\n";
+                    foreach($_SESSION['clientData'] AS $KEY => $VALUE){$message .= $KEY."_".$VALUE."_#_";}
+                    //TODO: FIGURE OUT WHY SESSION ISN'T SAVING
+                    include '../view/admin.php';
+                    exit;
+                } else {
+                    $message = "<h2 class='message'>Sorry $clientFirstname, but the update failed.</h2>";
+                    include '../view/admin.php';
+                    exit;
+                }
+        break;
+        
+        
+        case 'modifyPassword':
+            $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
+            $clientId = filter_input(INPUT_POST, 'clientId', FILTER_SANITIZE_NUMBER_INT);
+            
+            $checkPassword = checkPassword($clientPassword); // 1/0 == T/F
+            if(empty($checkPassword)) {
+                    $pwMessage = "<h2 id='pwMessage' class='message'>Please provide a new Password.</h2>";
+                    include '../view/client-update.php';
+                    exit;
+            }
+            $hashedPassword = password_hash($clientPassword, PASSWORD_DEFAULT);
+            $updateOutcome = updatePassword($hashedPassword, $clientId);
+                if($updateOutcome === 1) {
+                    $message = "<h2 class='message'>Thank you, ".$clientData['clientFirstname'].", for updating your Password.</h2>";
+                    include '../view/admin.php';
+                    exit;
+                } else {
+                    $message = "<h2 class='message'>Sorry ".$clientData['clientFirstname'].", but the update failed.</h2>";
+                    $message .= $clientPassword;
+                    $message .= $hashedPassword;
+                    $message .= $clientId;
+                    include '../view/admin.php';
+                    exit;
+                }
+        break;
+        
+        
+        
 	default:
 		include "../view/500.php";
 }

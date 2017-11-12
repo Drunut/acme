@@ -4,8 +4,9 @@
         header('Location: /acme/');
     }
 
-
-
+    if(isset($_SESSION['clientData'])){
+        $clientData = $_SESSION['clientData'];
+    }
 
 ?>
 <!DOCTYPE html>
@@ -32,19 +33,24 @@
 
         <main class="indexMain">
             <?php
-                echo "<h1>Welcome, ".$clientData['clientFirstname'].".</h1>";
-                echo "<ul id=adminUserData>";
+                echo "<h1>Welcome, ".$_SESSION['clientData']['clientFirstname']."</h1>";
+                if (isset($message)){ echo $message; }
+                echo "<ul id='adminUserData'>";
                   
-                echo "<li>User Id: ".$clientData['clientId']."</li>";
-                echo "<li>First Name: ".$clientData['clientFirstname']."</li>";
-                echo "<li>Last Name: ".$clientData['clientLastname']."</li>";
-                echo "<li>Email Address: ".$clientData['clientEmail']."</li>";
-                echo "<li>Level: ".$clientData['clientLevel']."</li>";
+                echo "<li>User Id: ".$_SESSION['clientData']['clientId']."</li>";
+                echo "<li>First Name: ".$_SESSION['clientData']['clientFirstname']."</li>";
+                echo "<li>Last Name: ".$_SESSION['clientData']['clientLastname']."</li>";
+                echo "<li>Email Address: ".$_SESSION['clientData']['clientEmail']."</li>";
                 echo "</ul>";
                 
-                if($clientData['clientLevel'] > 1){
+                echo "<section id='adminActions'>";
+                echo "<a href='/acme/accounts?action=modify'>Update Account Information</a>";
+                
+                if($_SESSION['clientData']['clientLevel'] > 1){
+                    echo "<h2 id='adminModify'>Use the link below to Modify the Products or Categories:</h2>";
                     echo "<p><a href='/acme/products/'>Add new Products or Categories</a></p>";
                 }
+                echo "</section>";
 ?>
             
             
