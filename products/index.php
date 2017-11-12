@@ -121,7 +121,7 @@ switch ($action) {
         
         
         case 'updateProd':
-            //Copypasted from the insert product case above
+            //Copypasted from the insert product case above & changed
             $catListDropDown    = filter_input( INPUT_POST, 'catListDropDown',    FILTER_SANITIZE_STRING );
             $invName            = filter_input( INPUT_POST, 'invName',            FILTER_SANITIZE_STRING );
             $invDescription     = filter_input( INPUT_POST, 'invDescription',     FILTER_SANITIZE_STRING );
@@ -137,31 +137,63 @@ switch ($action) {
             $invId              = filter_input( INPUT_POST, 'invId',              FILTER_SANITIZE_NUMBER_INT);
             
             
-            if( empty($catListDropDown)      || empty($productName)     || empty($productDescription) || empty($productImage)    ||
-                    empty($productThumbnail) || empty($productPrice)    || empty($productStock)       || empty($productSize)     ||
-                    empty($productWeight)    || empty($productLocation) || empty($productStyle)       || empty($productVendor)     ) {
+            if( empty($catListDropDown)      || empty($invName)     || empty($invDescription) || empty($invImage)    ||
+                        empty($invThumbnail) || empty($invPrice)    || empty($invStock)       || empty($invSize)     ||
+                        empty($invWeight)    || empty($invLocation) || empty($invStyle)       || empty($invVendor)     ) {
                 $message = "<h2 id='message'>1+ field(s) must be changed, all fields must be filled</h2>";
                 include '../view/prod-update.php';
                 exit;
             }
             // Send Product Data to the Model
-            $updateResult =  updateProduct( $catListDropDown, $productName, $productDescription
-                                      , $productImage, $productThumbnail, $productPrice
-                                      , $productStock, $productSize, $productWeight
-                                      , $productLocation, $productStyle, $productVendor, $invId );
+            $updateResult =  updateProduct( $catListDropDown, $invName, $invDescription
+                                      , $invImage, $invThumbnail, $invPrice
+                                      , $invStock, $invSize, $invWeight
+                                      , $invLocation, $invStyle, $invVendor, $invId );
             // Make sure it changed just one row (the one we added)
             if($updateResult === 1) {
-                    $message = "<h2 id='message'>Congratulations, ".$productName." was successfully updated.</h2>";
+                    $message = "<h2 id='message'>Congratulations, ".$invName." was successfully updated.</h2>";
                     $_SESSION['message'] = $message;
                     header('location: /acme/products/');
                     exit;
                 } else {
-                    $message = "<h2 id='message'>".$productName." update failed.</h2>";
+                    $message = "<h2 id='message'>".$invName." update failed.</h2>";
                     include '../view/prod-update.php';
                     exit;
                 }
         break;
         
+        case 'del':
+            $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+            $prodInfo = getProductInfo($invId);
+            if (count($prodInfo) < 1) {
+             $message = 'Sorry, no product information could be found.';
+            }
+            include '../view/prod-delete.php';
+            exit;
+        break;
+        
+        
+        case 'deleteProd':
+            //Copypasted from the deleteProd case above & changed
+            $invName            = filter_input( INPUT_POST, 'invName',            FILTER_SANITIZE_STRING );
+            $invId              = filter_input( INPUT_POST, 'invId',              FILTER_SANITIZE_NUMBER_INT);
+            
+            
+            // Send Product Data to the Model
+            $deleteResult =  deleteProduct( $invId );
+            // Make sure it changed just one row (the one we added)
+            if($deleteResult) {
+                    $message = "<h2 id='message'>Congratulations, ".$productName." was successfully deleted.</h2>";
+                    $_SESSION['message'] = $message;
+                    header('location: /acme/products/');
+                    exit;
+                } else {
+                    $message = "<h2 id='message'>".$productName." delete failed.</h2>";
+                    $_SESSION['message'] = $message;
+                    header('location: /acme/products/');
+                    exit;
+                }
+        break;
     
     
 	default:
