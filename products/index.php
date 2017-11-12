@@ -140,7 +140,7 @@ switch ($action) {
             if( empty($catListDropDown)      || empty($productName)     || empty($productDescription) || empty($productImage)    ||
                     empty($productThumbnail) || empty($productPrice)    || empty($productStock)       || empty($productSize)     ||
                     empty($productWeight)    || empty($productLocation) || empty($productStyle)       || empty($productVendor)     ) {
-                $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
+                $message = "<h2 id='message'>1+ field(s) must be changed, all fields must be filled</h2>";
                 include '../view/prod-update.php';
                 exit;
             }
