@@ -143,7 +143,8 @@ function updateProduct( $catListDropDown, $invName, $invDescription, $invImage, 
             , invWeight = :invWeight
             , invLocation = :invLocation
             , invStyle = :invStyle
-            , invVendor = :invVendor';
+            , invVendor = :invVendor
+            WHERE invId = :invId';
     
     // Create the prepared statement using the acme connection
     $stmt = $db->prepare($sql);
@@ -152,17 +153,17 @@ function updateProduct( $catListDropDown, $invName, $invDescription, $invImage, 
     // statement with the actual values in the variables
     // and tells the database the type of data it is
     $stmt->bindValue(':catListDropDown', $catListDropDown, PDO::PARAM_INT);
-    $stmt->bindValue(':productName', $productName, PDO::PARAM_STR);
-    $stmt->bindValue(':productDescription', $productDescription, PDO::PARAM_STR);
-    $stmt->bindValue(':productImage', $productImage, PDO::PARAM_STR);
-    $stmt->bindValue(':productThumbnail', $productThumbnail, PDO::PARAM_STR);
-    $stmt->bindValue(':productPrice', strval($productPrice), PDO::PARAM_STR);
-    $stmt->bindValue(':productStock', $productStock, PDO::PARAM_INT);
-    $stmt->bindValue(':productSize', $productSize, PDO::PARAM_INT);
-    $stmt->bindValue(':productWeight', $productWeight, PDO::PARAM_INT);
-    $stmt->bindValue(':productLocation', $productLocation, PDO::PARAM_STR);
-    $stmt->bindValue(':productStyle', $productStyle, PDO::PARAM_STR);
-    $stmt->bindValue(':productVendor', $productVendor, PDO::PARAM_STR);
+    $stmt->bindValue(':invName', $invName, PDO::PARAM_STR);
+    $stmt->bindValue(':invDescription', $invDescription, PDO::PARAM_STR);
+    $stmt->bindValue(':invImage', $invImage, PDO::PARAM_STR);
+    $stmt->bindValue(':invThumbnail', $invThumbnail, PDO::PARAM_STR);
+    $stmt->bindValue(':invPrice', strval($invPrice), PDO::PARAM_STR);
+    $stmt->bindValue(':invStock', $invStock, PDO::PARAM_INT);
+    $stmt->bindValue(':invSize', $invSize, PDO::PARAM_INT);
+    $stmt->bindValue(':invWeight', $invWeight, PDO::PARAM_INT);
+    $stmt->bindValue(':invLocation', $invLocation, PDO::PARAM_STR);
+    $stmt->bindValue(':invStyle', $invStyle, PDO::PARAM_STR);
+    $stmt->bindValue(':invVendor', $invVendor, PDO::PARAM_STR);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     
     // Insert the data

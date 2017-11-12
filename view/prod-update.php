@@ -61,13 +61,13 @@
                     if (isset($message)){ echo $message; }
                 ?>
             <p>Modify the Product below. All fields are required!</p>
-            <form action="/acme/products/index.php" id="productForm" method="post">
+            <form action="/acme/products/index.php" id="invForm" method="post">
                 
                 <label for="catListDropDown">Category</label>
                 <?php echo $catList; ?>
-                <label for="productName">Product Name</label>
+                <label for="invName">Product Name</label>
                 <!-- Added the NOT isset so that, if the outcome is successful, it won't re-populate the fields -->
-                <input type="text" id="productName" name="productName" required
+                <input type="text" id="invName" name="invName" required
                     <?php
                         if( isset($invName) ){
                             echo "value='$invName'";
@@ -77,19 +77,17 @@
                     ?>
                 >
                 
-                <label for="productDescription">Product Description</label>
-                <textarea id="productDescription" name="productDescription" rows="4" required>
-                    <?php
+                <label for="invDescription">Product Description</label>
+                <textarea id="invDescription" name="invDescription" rows="4" required><?php
                         if( isset($invDescription) ){
                             echo $invDescription;
                         } elseif( isset($prodInfo['invDescription']) ) {
                             echo $prodInfo['invDescription'];
                         }
-                    ?>
-                </textarea>
+                    ?></textarea>
                 
-                <label for="productImage">Product Image (path to image)</label>
-                <input type="text" id="productImage" name="productImage" required 
+                <label for="invImage">Product Image (path to image)</label>
+                <input type="text" id="invImage" name="invImage" required 
                     <?php
                         if( isset($invImage) ){
                             echo "value='$invImage'";
@@ -99,8 +97,8 @@
                     ?>
                 >
                 
-                <label for="productThumbnail">Product Thumbnail (path to image)</label>
-                <input type="text" id="productThumbnail" name="productThumbnail" required  
+                <label for="invThumbnail">Product Thumbnail (path to image)</label>
+                <input type="text" id="invThumbnail" name="invThumbnail" required  
                     <?php
                         if( isset($invThumbnail) ){
                             echo "value='$invThumbnail'";
@@ -110,8 +108,8 @@
                     ?>
                 >
                 
-                <label for="productPrice">Product Price</label>
-                <input type="number" id="productPrice" name="productPrice" required 
+                <label for="invPrice">Product Price</label>
+                <input type="number" id="invPrice" name="invPrice" required 
                     <?php
                         if( isset($invPrice) ){
                             echo "value='$invPrice'";
@@ -121,8 +119,8 @@
                     ?>
                 >
                 
-                <label for="productStock">Amount in Stock</label>
-                <input type="number" id="productStock" name="productStock" required 
+                <label for="invStock">Amount in Stock</label>
+                <input type="number" id="invStock" name="invStock" required 
                     <?php
                         if( isset($invStock) ){
                             echo "value='$invStock'";
@@ -132,8 +130,8 @@
                     ?>
                 >
                 
-                <label for="productSize">Product Size</label>
-                <input type="number" id="productSize" name="productSize" required 
+                <label for="invSize">Product Size</label>
+                <input type="number" id="invSize" name="invSize" required 
                     <?php
                         if( isset($invSize) ){
                             echo "value='$invSize'";
@@ -143,8 +141,8 @@
                     ?>
                 >
                 
-                <label for="productWeight">Product Weight</label>
-                <input type="number" id="productWeight" name="productWeight" required 
+                <label for="invWeight">Product Weight</label>
+                <input type="number" id="invWeight" name="invWeight" required 
                     <?php
                         if( isset($invWeight) ){
                             echo "value='$invWeight'";
@@ -154,8 +152,8 @@
                     ?>
                 >
                 
-                <label for="productLocation">Product Location</label>
-                <input type="text" id="productLocation" name="productLocation" required 
+                <label for="invLocation">Product Location</label>
+                <input type="text" id="invLocation" name="invLocation" required 
                     <?php
                         if( isset($invLocation) ){
                             echo "value='$invLocation'";
@@ -165,8 +163,8 @@
                     ?>
                 >
                 
-                <label for="productStyle">Product Style</label>
-                <input type="text" id="productStyle" name="productStyle" required 
+                <label for="invStyle">Product Style</label>
+                <input type="text" id="invStyle" name="invStyle" required 
                     <?php
                         if( isset($invStyle) ){
                             echo "value='$invStyle'";
@@ -176,8 +174,8 @@
                     ?>
                 >
                 
-                <label for="productVendor">Product Vendor</label>
-                <input type="text" id="productVendor" name="productVendor" required 
+                <label for="invVendor">Product Vendor</label>
+                <input type="text" id="invVendor" name="invVendor" required 
                     <?php
                         if( isset($invVendor) ){
                             echo "value='$invVendor'";
