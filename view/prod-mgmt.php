@@ -3,6 +3,12 @@
         header('Location: /acme/index.php');
         exit;
     }
+    
+    if (isset($_SESSION['message'])) {
+        $message = $_SESSION['message'];
+    }
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="en-us">
@@ -50,3 +56,4 @@
 
 
 </html>
+<?php unset($_SESSION['message']); ?>

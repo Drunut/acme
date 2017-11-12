@@ -42,6 +42,8 @@ switch ($action) {
             include "../view/new-prod.php";
             break;
         
+        
+        
         // Form Submission Cases
         case 'createProduct':
             //Individual assignment and filters instead of an array with filters as per assignment
@@ -83,6 +85,8 @@ switch ($action) {
                 }
             break;
             
+            
+            
         case 'createCategory':
             //Check if there's a supplied category name
             if (empty($categoryName)){
@@ -102,6 +106,63 @@ switch ($action) {
             }
             break;
             
+            
+        case 'mod':
+            $invId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+            $prodInfo = getProductInfo($invId);
+            if(count($prodInfo)<1){
+                $message = 'Sorry, no product information could be found.'; // MAYBE CHECK ON THIS THIGN BECAUSE IT MIGHT NEED TAGS
+            }
+            include '../view/prod-update.php';
+            exit;
+        break;
+
+        
+        
+        case 'updateProd':
+            //Copypasted from the insert product case above
+            $catListDropDown    = filter_input( INPUT_POST, 'catListDropDown',    FILTER_SANITIZE_STRING );
+            $productName        = filter_input( INPUT_POST, 'productName',        FILTER_SANITIZE_STRING );
+            $productDescription = filter_input( INPUT_POST, 'productDescription', FILTER_SANITIZE_STRING );
+            $productImage       = filter_input( INPUT_POST, 'productImage',       FILTER_SANITIZE_STRING );
+            $productThumbnail   = filter_input( INPUT_POST, 'productThumbnail',   FILTER_SANITIZE_STRING );
+            $productPrice       = filter_input( INPUT_POST, 'productPrice',       FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+            $productStock       = filter_input( INPUT_POST, 'productStock',       FILTER_SANITIZE_NUMBER_INT );
+            $productSize        = filter_input( INPUT_POST, 'productSize',        FILTER_SANITIZE_NUMBER_INT );
+            $productWeight      = filter_input( INPUT_POST, 'productWeight',      FILTER_SANITIZE_NUMBER_INT );
+            $productLocation    = filter_input( INPUT_POST, 'productLocation',    FILTER_SANITIZE_STRING );
+            $productStyle       = filter_input( INPUT_POST, 'productStyle',       FILTER_SANITIZE_STRING );
+            $productVendor      = filter_input( INPUT_POST, 'productVendor',      FILTER_SANITIZE_STRING );
+            $invId              = filter_input( INPUT_POST, 'invId',              FILTER_SANITIZE_NUMBER_INT);
+            
+            
+            if( empty($catListDropDown)      || empty($productName)     || empty($productDescription) || empty($productImage)    ||
+                    empty($productThumbnail) || empty($productPrice)    || empty($productStock)       || empty($productSize)     ||
+                    empty($productWeight)    || empty($productLocation) || empty($productStyle)       || empty($productVendor)     ) {
+                $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
+                include '../view/prod-update.php';
+                exit;
+            }
+            // Send Product Data to the Model
+            $updateResult =  updateProduct( $catListDropDown, $productName, $productDescription
+                                      , $productImage, $productThumbnail, $productPrice
+                                      , $productStock, $productSize, $productWeight
+                                      , $productLocation, $productStyle, $productVendor, $invId );
+            // Make sure it changed just one row (the one we added)
+            if($updateResult === 1) {
+                    $message = "<h2 id='message'>Congratulations, ".$productName." was successfully updated.</h2>";
+                    $_SESSION['message'] = $message;
+                    header('location: /acme/products/');
+                    exit;
+                } else {
+                    $message = "<h2 id='message'>".$productName." update failed.</h2>";
+                    include '../view/prod-update.php';
+                    exit;
+                }
+        break;
+        
+    
+    
 	default:
             $products = getProductBasics();
             if( count($products) > 0 ) {
