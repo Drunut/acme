@@ -64,7 +64,7 @@ switch ($action) {
             if( empty($catListDropDown)      || empty($productName)     || empty($productDescription) || empty($productImage)    ||
                     empty($productThumbnail) || empty($productPrice)    || empty($productStock)       || empty($productSize)     ||
                     empty($productWeight)    || empty($productLocation) || empty($productStyle)       || empty($productVendor)     ) {
-                $message = "<h2 id='message'>Please provide information for all empty form fields.</h2>";
+                $message = "<h2 class='message'>Please provide information for all empty form fields.</h2>";
                 include '../view/new-prod.php';
                 exit;
             }
@@ -75,11 +75,11 @@ switch ($action) {
                                       , $productLocation, $productStyle, $productVendor );
             // Make sure it changed just one row (the one we added)
             if($prodOutcome === 1) {
-                    $message = "<h2 id='message'>Congratulations, ".$productName." was successfully added.</h2>";
+                    $message = "<h2 class='message'>Congratulations, ".$productName." was successfully added.</h2>";
                     include '../view/new-prod.php';
                     exit;
                 } else {
-                    $message = "<h2 id='message'>".$productName." registration failed. Please try again.</h2>";
+                    $message = "<h2 class='message'>".$productName." registration failed. Please try again.</h2>";
                     include '../view/new-prod.php';
                     exit;
                 }
@@ -90,7 +90,7 @@ switch ($action) {
         case 'createCategory':
             //Check if there's a supplied category name
             if (empty($categoryName)){
-                $message = "<h2 id='message'>Please provide a category name.</h2>";
+                $message = "<h2 class='message'>Please provide a category name.</h2>";
                 include '../view/new-cat.php';
                 exit;
             }
@@ -100,7 +100,7 @@ switch ($action) {
             if ($catOutcome === 1) {
                 header( "Location: /acme/products/index.php" );
             } else {
-                $message = "<h2 id='message'>".$categoryName." registration failed. Please try again.</h2>";
+                $message = "<h2 class='message'>".$categoryName." registration failed. Please try again.</h2>";
                 include '../view/new-cat.php';
                 exit;
             }
@@ -140,7 +140,7 @@ switch ($action) {
             if( empty($catListDropDown)      || empty($invName)     || empty($invDescription) || empty($invImage)    ||
                         empty($invThumbnail) || empty($invPrice)    || empty($invStock)       || empty($invSize)     ||
                         empty($invWeight)    || empty($invLocation) || empty($invStyle)       || empty($invVendor)     ) {
-                $message = "<h2 id='message'>1+ field(s) must be changed, all fields must be filled</h2>";
+                $message = "<h2 class='message'>1+ field(s) must be changed, all fields must be filled </h2>";
                 include '../view/prod-update.php';
                 exit;
             }
@@ -151,12 +151,12 @@ switch ($action) {
                                       , $invLocation, $invStyle, $invVendor, $invId );
             // Make sure it changed just one row (the one we added)
             if($updateResult === 1) {
-                    $message = "<h2 id='message'>Congratulations, ".$invName." was successfully updated.</h2>";
+                    $message = "<h2 class='message'>Congratulations, ".$invName." was successfully updated.</h2>";
                     $_SESSION['message'] = $message;
                     header('location: /acme/products/');
                     exit;
                 } else {
-                    $message = "<h2 id='message'>".$invName." update failed.</h2>";
+                    $message = "<h2 class='message'>".$invName." update failed.</h2>";
                     include '../view/prod-update.php';
                     exit;
                 }
@@ -183,12 +183,12 @@ switch ($action) {
             $deleteResult =  deleteProduct( $invId );
             // Make sure it changed just one row (the one we added)
             if($deleteResult) {
-                    $message = "<h2 id='message'>Congratulations, ".$productName." was successfully deleted.</h2>";
+                    $message = "<h2 class='message'>Congratulations, ".$productName." was successfully deleted.</h2>";
                     $_SESSION['message'] = $message;
                     header('location: /acme/products/');
                     exit;
                 } else {
-                    $message = "<h2 id='message'>".$productName." delete failed.</h2>";
+                    $message = "<h2 class='message'>".$productName." delete failed.</h2>";
                     $_SESSION['message'] = $message;
                     header('location: /acme/products/');
                     exit;

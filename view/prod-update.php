@@ -2,9 +2,12 @@
     if(!isset($_SESSION['loggedin']) && !($clientData['clientLevel'] > 1)){
         header('Location: /acme/index.php');
     }
+    $prodInfo = getProductInfo($invId);
+    // I have a bug where, despite that $prodInfo from the products controller SHOULD be in scope, it's unrecognized in this file. Best workaround i have is to re-assign.
+    // Like it's super weird. $invId is in scope, so I can call the function, but $prodInfo isn't, despite them being called right after eachother.
     
     // Build a dropdown of categories for prod-update.php
-    $catList = '<select id="catListDropDown" name="catListDropDown" form="productForm">';
+    $catList = '<select id="catListDropDown" name="catListDropDown" form="invForm">';
     foreach ($categories as $category) {
         $catList .= "<option value='$category[categoryId]'";
         // Repopulate drop-down if it was selected previously or if it was fetched in order to modify
@@ -184,8 +187,8 @@
                         }
                     ?>
                 >
-                <input type="hidden" name="action" value="updateProd">
                 <input type="hidden" name="invId" value="<?php if(isset($prodInfo['invId'])){ echo $prodInfo['invId'];} elseif(isset($invId)){ echo $invId; } ?>">
+                <input type="hidden" name="action" value="updateProd">
                 
                 <input type="submit" value="Update Product">
                 
