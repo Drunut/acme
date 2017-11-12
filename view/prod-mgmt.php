@@ -1,8 +1,8 @@
 <?php 
     if(!isset($_SESSION['loggedin']) && !($clientData['clientLevel'] > 1)){
         header('Location: /acme/index.php');
+        exit;
     }
-
 ?>
 <!DOCTYPE html>
 <html lang="en-us">
@@ -32,6 +32,13 @@
                 <li><a href="/acme/products/index.php?action=newCategory">Add a new Category</a></li>
                 <li><a href="/acme/products/index.php?action=newProduct">Add a new Product</a></li>
             </ul>
+            <?php
+                if ( isset($message) ) {
+                    echo $message;
+                } if ( isset($prodList) ) {
+                    echo $prodList;
+                }
+            ?>
         </main>
 
         <footer>
