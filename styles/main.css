@@ -277,6 +277,35 @@ Product Management
     color: #de2226;
     font-size: 2em;
 }
+
+/***************************
+Random Garbage Table Styling I shamelessly lifted off w3schools and tweaked some
+***************************/
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 90%;
+    margin: 2% 5%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+thead {
+    background-color: #de2226;
+}
+
+td:not(:first-child) {
+    text-align: center;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
 /****************************************************************************************************/
                                             /* FOOTER */
 /****************************************************************************************************/
