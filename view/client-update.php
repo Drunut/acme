@@ -31,9 +31,9 @@
                     if (isset($accMessage)){ echo $accMessage; }
                 ?>
             <form action="/acme/accounts/index.php" id="accountUpdate" method="post">
-                <label for="clientFirstName">First name</label>
+                <label for="clientFirstname">First name</label>
                 <input type="text" id="clientFirstname" name="clientFirstname" <?php if(isset($clientData['clientFirstname'])){echo "value=\"".$clientData['clientFirstname']."\"";} ?> required>
-                <label for="clientLastName">Last name</label>
+                <label for="clientLastname">Last name</label>
                 <input type="text" id="clientLastname" name="clientLastname" <?php if(isset($clientData['clientLastname'])){echo "value=\"".$clientData['clientLastname']."\"";} ?> required>
                 <label for="clientEmail">Email Address</label>
                 <input type="email" id='clientEmail' name="clientEmail" <?php if(isset($clientData['clientEmail'])){echo "value=\"".$clientData['clientEmail']."\"";} ?> required>

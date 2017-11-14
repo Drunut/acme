@@ -51,8 +51,8 @@ switch ($action) {
             
 	case 'register':
                 // Filter and store the data
-                $clientFirstname = filter_input(INPUT_POST, 'clientFirstName', FILTER_SANITIZE_STRING);
-                $clientLastname = filter_input(INPUT_POST, 'clientLastName', FILTER_SANITIZE_STRING);
+                $clientFirstname = filter_input(INPUT_POST, 'clientFirstname', FILTER_SANITIZE_STRING);
+                $clientLastname = filter_input(INPUT_POST, 'clientLastname', FILTER_SANITIZE_STRING);
                 $clientEmail = filter_input(INPUT_POST, 'clientEmail');
                 $clientPassword = filter_input(INPUT_POST, 'clientPassword', FILTER_SANITIZE_STRING);
                 $clientEmail = checkEmail($clientEmail);
@@ -161,19 +161,18 @@ switch ($action) {
                 
                 //Send update data to the model
                 $updateOutcome = updateClient($clientFirstname, $clientLastname, $clientEmail, $clientId);
-                if($updateOutcome === 1) {
+                if($updateOutcome === 1) { // Successful update
                     $message = "<h2 class='message'>Thank you, $clientFirstname, for updating your information.</h2>";
-                    foreach($_SESSION['clientData'] AS $KEY => $VALUE){$message .= $KEY."_".$VALUE."_|_";}
-                    //Update our session information to the newly updated info
-                    $_SESSION['clientData']['clientFirstName'] = $clientFirstname;
-                    $_SESSION['clientData']['clientLastName'] = $clientLastname;
+                    
+                    //Update our session information and re-assign to clientData for the admin view
+                    $_SESSION['clientData']['clientFirstname'] = $clientFirstname;
+                    $_SESSION['clientData']['clientLastname'] = $clientLastname;
                     $_SESSION['clientData']['clientEmail'] = $clientEmail;
-                    $message .= "\n";
-                    foreach($_SESSION['clientData'] AS $KEY => $VALUE){$message .= $KEY."_".$VALUE."_#_";}
-                    //TODO: FIGURE OUT WHY SESSION ISN'T SAVING
+                    $clientData = $_SESSION['clientData'];
+                    
                     include '../view/admin.php';
                     exit;
-                } else {
+                } else { // Unsuccessful update
                     $message = "<h2 class='message'>Sorry $clientFirstname, but the update failed.</h2>";
                     include '../view/admin.php';
                     exit;
