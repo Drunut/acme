@@ -56,7 +56,7 @@
             <form action="/acme/accounts/index.php" id="passwordUpdate" method="post">
             <label for="clientPassword">Change Current Password to:</label>
                 <p id="passwordReq">8+ characters in length, with at least 1 number, 1 capital letter and 1 special character</p>
-                <input type="password" class="pwdbtn" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
+                <input type="password" id="clientPassword" class="pwdbtn" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
                 <input type="hidden" name="clientId" value="<?php if(isset($clientData['clientId'])){ echo $clientData['clientId'];} ?>">
                 <input type="hidden" name="action" value="modifyPassword">
                 <input type="submit" value="Update Password">
