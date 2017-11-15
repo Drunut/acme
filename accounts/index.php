@@ -164,11 +164,9 @@ switch ($action) {
                 if($updateOutcome === 1) { // Successful update
                     $message = "<h2 class='message'>Thank you, $clientFirstname, for updating your information.</h2>";
                     
-                    //Update our session information and re-assign to clientData for the admin view
-                    $_SESSION['clientData']['clientFirstname'] = $clientFirstname;
-                    $_SESSION['clientData']['clientLastname'] = $clientLastname;
-                    $_SESSION['clientData']['clientEmail'] = $clientEmail;
-                    $clientData = $_SESSION['clientData'];
+                    $clientData = getClientById($clientId);
+                    array_pop($clientData);
+                    $_SESSION['clientData'] = $clientData;
                     
                     include '../view/admin.php';
                     exit;
@@ -209,5 +207,6 @@ switch ($action) {
         
         
 	default:
-		include "../view/500.php";
+		include "../view/login.php";
+		break;
 }
