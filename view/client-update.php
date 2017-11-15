@@ -25,7 +25,7 @@
             </nav>
         </header>
 
-        <main class="indexMain">
+        <main>
             <h1>Account Update</h1>
                 <?php // Checking to see if $message is already set before we do this.
                     if (isset($accMessage)){ echo $accMessage; }

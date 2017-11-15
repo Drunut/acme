@@ -20,7 +20,7 @@
             </nav>
         </header>
 
-        <main class="indexMain">
+        <main>
             <h1><?php echo $type; ?> Products</h1>
             <?php if(isset($message)){ echo $message; } ?>
             <?php if(isset($prodDisplay)){ echo $prodDisplay; } ?>

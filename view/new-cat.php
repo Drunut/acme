@@ -26,7 +26,7 @@
             </nav>
         </header>
 
-        <main class="indexMain">
+        <main>
             <h1>New Category</h1>
             <?php // Checking to see if $message is already set before we do this.
                     if (isset($message)){ echo $message; }

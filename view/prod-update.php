@@ -50,7 +50,7 @@
             </nav>
         </header>
 
-        <main class="indexMain">
+        <main>
             <h1>
                 <?php 
                 if( isset($prodInfo['invName']) ){ 
