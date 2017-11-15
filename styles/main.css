@@ -318,6 +318,33 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
+/************
+Category Page
+************/
+
+
+#prod-display{
+ margin: 0;
+ padding: 0;
+ display: flex;
+ flex-direction: column;
+ align-content: center;
+}
+#prod-display li{
+ margin-bottom: .5em;
+ border: 1px #ccc solid;
+ list-style-type: none;
+ flex: 1 1 auto;
+}
+#prod-display li img{
+ width: 100%;
+ height: 200px;
+}
+
+
+
+
+
 /****************************************************************************************************/
                                             /* FOOTER */
 /****************************************************************************************************/
@@ -349,8 +376,18 @@ footer{
         font-size: 1em;
     }
     #recipes li a{
-    padding: 10px 0px;
-}
+        padding: 10px 0px;
+    }
+    #prod-display{
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+    #prod-display li{
+        max-width: 200px;
+        flex: 1 0 auto;
+        text-align: center;
+        max-height: 400px;
+    }
 }
 @media (min-width: 60em){
     /* Whatever attributes for desktop size */
@@ -369,5 +406,5 @@ footer{
    ,form input:not([type="submit"]){
         width: 33vw; /* Large @m changes to 33vw */
     }
-
+    
 }
