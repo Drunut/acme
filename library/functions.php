@@ -13,10 +13,10 @@ function checkPassword($clientPassword){
 function createNav($categories){
     // Build a navigation bar using the categories we were passed
     $navList = '<ul id="nav_ul">';
-    $navList .= "<li class='nav_li'><a href='/acme/index.php' title='View the Acme home page'>Home</a></li>";
+    $navList .= "<li class='nav_li'><a href='/acme/' title='View the Acme home page'>Home</a></li>";
     
     foreach ($categories as $category) {
-        $navList .= "<li class='nav_li'><a href='/acme/index.php?action=$category[categoryName]' title='View our $category[categoryName] product line'>$category[categoryName]</a></li>";
+        $navList .= "<li class='nav_li'><a href='/acme/products/?action=category&type=$category[categoryName]' title='View our $category[categoryName] product line'>$category[categoryName]</a></li>";
     }
     
     $navList .= '</ul>';

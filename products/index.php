@@ -195,7 +195,21 @@ switch ($action) {
                 }
         break;
     
+        
+        case 'category':
+            $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
+            $products = getProductsByCategory($type);
+            if(!count($products)){
+              $message = "<h2 class='message'>Sorry, no $type products could be found.</h2>";
+            } else {
+              $prodDisplay = buildProductsDisplay($products);
+            }
+            include '../view/category.php';
+        break;
     
+        
+        
+        
 	default:
             $products = getProductBasics();
             if( count($products) > 0 ) {
