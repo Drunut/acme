@@ -20,7 +20,7 @@
             </nav>
         </header>
 
-        <main class="indexMain">
+        <main>
             <h1>Template Page</h1>
         </main>
 
