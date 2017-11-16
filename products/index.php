@@ -206,9 +206,20 @@ switch ($action) {
             }
             include '../view/category.php';
         break;
+        
+        case 'prodInfo':
+            $id = filter_input(INPUT_GET, 'prodId', FILTER_SANITIZE_NUMBER_INT);
+            $info = getProductInfo($id);
+            if (count($prodInfo) < 1) {
+             $message = 'Sorry, no product information could be found.';
+             unset($info);
+             include '../view/prod-detail.php';
+             exit;
+            }
+            include '../view/prod-detail.php';
+        break;
     
-        
-        
+    
         
 	default:
             $products = getProductBasics();

@@ -40,13 +40,28 @@ function createHeaderAccount($loggedin){
 function buildProductsDisplay($products){
     $pd = '<ul id="prod-display">';
     foreach ($products as $product) {
-        $pd .= '<li>';
+        $pd .= "<li><a href='/acme/products/?action=prodInfo&prodId=$product[productId]'>";
         $pd .= "<img src='$product[invThumbnail]' alt='Image of $product[invName] on Acme.com'>";
         $pd .= '<hr>';
         $pd .= "<h2>$product[invName]</h2>";
         $pd .= "<span>$$product[invPrice]</span>";
-        $pd .= '</li>';
+        $pd .= '</li></a>';
     }
     $pd .= '</ul>';
     return $pd;
+}
+
+function buildSpecificProductDisplay($product){
+    $spd = '<ul id="single-prod-display">';
+    //TODO: Figure out how the page is going to be layed out
+    foreach ($products as $product) {
+        $spd .= "<li><a href='/acme/products/?action=prodInfo&prodId=$product[productId]'>";
+        $spd .= "<img src='$product[invThumbnail]' alt='Image of $product[invName] on Acme.com'>";
+        $spd .= '<hr>';
+        $spd .= "<h2>$product[invName]</h2>";
+        $spd .= "<span>$$product[invPrice]</span>";
+        $spd .= '</li></a>';
+    }
+    $spd .= '</ul>';
+    return $spd;
 }
