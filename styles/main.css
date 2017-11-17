@@ -341,6 +341,66 @@ Category Page
  height: 200px;
 }
 
+/******************
+Product Detail Page
+******************/
+/* sp = specific product*/
+#spPage{
+    display: flex;
+    flex-direction: column;
+}
+/***************/
+#spPage .message{
+    
+}
+
+#spImage{
+    
+}
+
+#spStats{
+    
+}
+/**/#spName{
+/**/    
+/**/}
+/**/#spVendor{
+/**/    
+/**/}
+/**/#spAvailability{
+/**/    
+/**/}
+/**//**/#spPrice{
+/**//**/    
+/**//**/}
+/**//**/#spStock{
+/**//**/    
+/**//**/}
+/**//**/#spLocation{
+/**//**/    
+/**//**/}
+/**/
+/**/#spStyle{
+/**/    
+/**/}
+/**/#spStyle + span{
+/**/    
+/**/}
+/**/#spWeight{
+/**/    
+/**/}
+/**/#spSize{
+/**/    
+/**/}
+
+#spExtended{
+    
+}
+/**/#spDescription{
+/**/    
+/**/}
+
+
 
 
 

@@ -53,15 +53,8 @@ function buildProductsDisplay($products){
 
 function buildSpecificProductDisplay($product){
     $spd = '<ul id="single-prod-display">';
-    //TODO: Figure out how the page is going to be layed out
-    foreach ($products as $product) {
-        $spd .= "<li><a href='/acme/products/?action=prodInfo&prodId=$product[productId]'>";
-        $spd .= "<img src='$product[invThumbnail]' alt='Image of $product[invName] on Acme.com'>";
-        $spd .= '<hr>';
-        $spd .= "<h2>$product[invName]</h2>";
-        $spd .= "<span>$$product[invPrice]</span>";
-        $spd .= '</li></a>';
-    }
-    $spd .= '</ul>';
+    //TODO: Figure out how the page is going to be layed out first
+    
+    $spd .= "<li><a href='/acme/products/?action=prodInfo&prodId=$product[productId]'>";
     return $spd;
 }

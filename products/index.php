@@ -209,14 +209,14 @@ switch ($action) {
         
         case 'prodInfo':
             $id = filter_input(INPUT_GET, 'prodId', FILTER_SANITIZE_NUMBER_INT);
-            $info = getProductInfo($id);
+            $prodInfo = getProductInfo($id);
             if (count($prodInfo) < 1) {
              $message = 'Sorry, no product information could be found.';
-             unset($info);
+             unset($prodInfo);
              include '../view/prod-detail.php';
              exit;
             }
-            include '../view/prod-detail.php';
+            include '../view/prod-detail.php'; //We use prodInfo on this page to build it
         break;
     
     
