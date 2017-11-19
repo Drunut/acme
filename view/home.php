@@ -14,7 +14,7 @@
                   };
                   echo $headerAccount //iirc you had us put the header account stuff in the controller too, so it's over in \acme\index.php
             ?>
-            <nav>
+            <nav id='homeNav'>
                 <?php
                     // include "common/nav.php"
                     echo $navList;

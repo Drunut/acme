@@ -213,10 +213,11 @@ switch ($action) {
             if (count($prodInfo) < 1) {
              $message = 'Sorry, no product information could be found.';
              unset($prodInfo);
-             include '../view/prod-detail.php';
+             include '../view/product-detail.php';
              exit;
             }
-            include '../view/prod-detail.php'; //We use prodInfo on this page to build it
+            $prodPage = buildSpecificProductDisplay($prodInfo);
+            include '../view/product-detail.php';
         break;
     
     
