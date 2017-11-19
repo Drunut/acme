@@ -111,7 +111,11 @@ nav a:link, nav a:visited{
     background-color: #ffffff;
 }
 
-.nav_li:nth-child(1){
+#homeNav #homeNavItem{
+    background-color: #ffffff;
+}
+
+#currentNavItem {
     background-color: #ffffff;
 }
 
@@ -318,6 +322,137 @@ tr:nth-child(even) {
     background-color: #dddddd;
 }
 
+/************
+Category Page
+************/
+
+
+#prod-display{
+ margin: 0;
+ padding: 0;
+ display: flex;
+ flex-direction: column;
+ align-content: center;
+}
+#prod-display li{
+ margin-bottom: .5em;
+ border: 1px #ccc solid;
+ list-style-type: none;
+ flex: 1 1 auto;
+}
+#prod-display li img{
+ width: 100%;
+ height: 200px;
+}
+
+/******************
+Product Detail Page
+******************/
+/* sp = specific product*/
+#spPage{
+    display: grid;
+    grid-template-columns: 1fr 3fr 3fr 1fr;
+    grid-template-rows: auto auto auto auto auto auto auto auto 2em 1fr;
+    grid-template-areas:
+        ". message message ."
+        ". image image ."
+        "name name name name"
+        "vendor vendor price price"
+        ". . price price"
+        "style style stock stock"
+        "style style location location"
+        "w_s w_s . ."
+        ". . . ."
+        "description description description description";
+    justify-content: center;
+    
+    margin: 0 2.5% 2em 2.5%;
+    
+}
+/***************/
+#spPage .message{
+    grid-area: message;
+}
+
+#spImage{
+    grid-area: image;
+    width: 100%;
+    margin: 2em 0 1em 0;
+}
+
+.spStats:not(#spName){
+    display: flex;
+    align-items: flex-end;
+}
+/**/#spName{
+/**/    grid-area: name;
+        margin: 0;
+        padding: 0.2em;
+        padding-left: 0;
+        
+        background-color: lightgrey;
+/**/}
+/**/#spVendor{
+/**/    grid-area: vendor;
+        font-style: italic;
+/**/}
+/**/.spAvailability{
+        text-align: right;
+/**/}
+/**//**/#spPrice{
+/**//**/    grid-area: price;
+            font-size: 1.7em;
+            color: #de2226;
+            font-weight: bold;
+/**//**/}
+/**//**/#spStock{
+/**//**/    grid-area: stock;
+            color: green;
+            font-size: 1.3em;
+            margin-bottom: 0.2em;
+/**//**/}
+/**//**/#spLocation{
+/**//**/    grid-area: location;
+            font-style: italic;
+/**//**/}
+/**/
+/**/#spStyle{
+/**/    grid-area: style;
+        display: flex;
+        align-items: flex-end;
+        font-size: 1.5em;
+        margin-bottom: 0.2em;
+        
+/**/}
+/**/#spStyle span{
+        padding-left: 5%;
+/**/    font-size: 1rem;
+/**/}
+/**/#spWeight{
+/**/    grid-area: w_s;
+        font-size: 0.9em;
+        margin-left: 1em;
+        font-style: italic;
+/**/}
+/****/#spSize{
+/****/    grid-area: w_s;
+          padding-left: 5%;
+/****/}
+
+.spExtended{
+    
+}
+/**/#spDescription{
+/**/    grid-area: description;
+        padding: 1em;
+        background-color: lightgray;
+/**/}
+
+
+
+
+
+
 /****************************************************************************************************/
                                             /* FOOTER */
 /****************************************************************************************************/
@@ -349,8 +484,44 @@ footer{
         font-size: 1em;
     }
     #recipes li a{
-    padding: 10px 0px;
-}
+        padding: 10px 0px;
+    }
+    #prod-display{
+        flex-flow: row wrap;
+        justify-content: center;
+    }
+    #prod-display li{
+        max-width: 200px;
+        flex: 1 0 auto;
+        text-align: center;
+        max-height: 400px;
+    }
+    /******************
+    Product Detail Page
+    ******************/
+    /* sp = specific product*/
+    #spPage{
+        grid-template-columns: 1fr 6fr 1fr 1fr 3fr 3fr 1fr;
+        grid-template-rows: auto auto auto auto auto auto 2em 1fr;
+        grid-template-areas:
+            ". image  . name name name name"
+            ". image  . vendor vendor price price"
+            ". image  . . . price price"
+            ". image  . style style stock stock"
+            ". image  . style style location location"
+            ". image  . w_s w_s . ."
+            ". message . . . . ."
+            "description description description description description description description";
+    }
+
+    /**/.spAvailability{
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+    /**/}
+    /**//**/#spPrice, #spLocation, #spWeight, #spVendor{
+    /**//**/    align-self: flex-start;
+    /**//**/}
 }
 @media (min-width: 60em){
     /* Whatever attributes for desktop size */
@@ -369,5 +540,5 @@ footer{
    ,form input:not([type="submit"]){
         width: 33vw; /* Large @m changes to 33vw */
     }
-
+    
 }

@@ -28,7 +28,7 @@
             </nav>
         </header>
 
-        <main class="indexMain">
+        <main>
             <?php
                 echo "<h1>Welcome, ".$clientData['clientFirstname']."</h1>";
                 if (isset($message)){ echo $message; }

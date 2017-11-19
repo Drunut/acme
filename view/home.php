@@ -14,7 +14,7 @@
                   };
                   echo $headerAccount //iirc you had us put the header account stuff in the controller too, so it's over in \acme\index.php
             ?>
-            <nav>
+            <nav id='homeNav'>
                 <?php
                     // include "common/nav.php"
                     echo $navList;
@@ -22,7 +22,7 @@
             </nav>
         </header>
 
-        <main class="indexMain">
+        <main>
             <h1>Welcome to Acme!</h1>
             <section id="rocket">
                 <img id="rocketImg" src="images/site/rocketfeature.jpg" alt="Rocket Responsibly">

@@ -31,7 +31,7 @@
             </nav>
         </header>
 
-        <main class="indexMain" id="pMMain">
+        <main  id="pMMain">
             <h1>Product Management</h1>
             <p>Welcome to the product management page. Please choose an option below:</p>
             <ul id="pMList">

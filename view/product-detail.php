@@ -2,7 +2,10 @@
 <html lang="en-us">
     <head>
         <title>Acme</title>
-        <?php include "../common/head.php" ?>
+        <?php
+            include "../common/head.php";
+            echo "<style> .nav_li:nth-child(".($prodInfo['categoryId'] + 1)."){ background-color: #ffffff; } </style>"; #This keeps the nav properly highlighted
+        ?>
     </head>
 
     <body>
@@ -19,9 +22,13 @@
                 ?>
             </nav>
         </header>
-
-        <main>
-            <h1>Template Page</h1>
+        <main id="spPage">
+            <?php
+                if(isset($message)){ echo $message; }
+                if(isset($prodPage)){ echo $prodPage; }
+            ?>
+            
+            
         </main>
 
         <footer>

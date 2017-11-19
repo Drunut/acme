@@ -13,10 +13,10 @@ function checkPassword($clientPassword){
 function createNav($categories){
     // Build a navigation bar using the categories we were passed
     $navList = '<ul id="nav_ul">';
-    $navList .= "<li class='nav_li'><a href='/acme/index.php' title='View the Acme home page'>Home</a></li>";
+    $navList .= "<li id='homeNavItem' class='nav_li'><a href='/acme/' title='View the Acme home page'>Home</a></li>";
     
     foreach ($categories as $category) {
-        $navList .= "<li class='nav_li'><a href='/acme/index.php?action=$category[categoryName]' title='View our $category[categoryName] product line'>$category[categoryName]</a></li>";
+        $navList .= "<li id='$category[categoryName]NavItem' class='nav_li'><a href='/acme/products/?action=category&type=$category[categoryName]' title='View our $category[categoryName] product line'>$category[categoryName]</a></li>";
     }
     
     $navList .= '</ul>';
@@ -35,4 +35,33 @@ function createHeaderAccount($loggedin){
     }
     
     return $headerAccount;
+}
+
+function buildProductsDisplay($products){
+    $pd = '<ul id="prod-display">';
+    foreach ($products as $product) {
+        $pd .= "<li><a href='/acme/products/?action=prodInfo&prodId=$product[invId]'>";
+        $pd .= "<img src='$product[invThumbnail]' alt='Image of $product[invName] on Acme.com'>";
+        $pd .= '<hr>';
+        $pd .= "<h2>$product[invName]</h2>";
+        $pd .= "<span>$$product[invPrice]</span>";
+        $pd .= '</li></a>';
+    }
+    $pd .= '</ul>';
+    return $pd;
+}
+
+function buildSpecificProductDisplay($product){
+    $spd = "<img id='spImage' src='$product[invImage]' alt='$product[invImage] Product Image'>";
+            
+    $spd .= "<h1 id='spName' class='spStats'>$product[invName]</h1>";
+    $spd .= "<p id='spVendor' class='spStats'>By: $product[invVendor]</p>";
+    $spd .= "<p id='spPrice' class='spAvailability'>$$product[invPrice]</p>";
+    $spd .= "<p id='spStock' class='spAvailability'>$product[invStock] in stock</p>";
+    $spd .= "<p id='spLocation' class='spAvailability'>Ships from:<br>$product[invLocation]</p>";
+    $spd .= "<p id='spStyle' class='spStats'>$product[invStyle]<span>style</span></p>";
+    $spd .= "<p id='spWeight' class='spStats'>$product[invWeight] lbs. /";
+    $spd .= "<span id='spSize' class='spStats'>$product[invSize] ft<sup>3</sup></span></p>";
+    $spd .= "<p id='spDescription' class='spExtended'>$product[invDescription]</p>";
+    return $spd;
 }

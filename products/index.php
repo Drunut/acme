@@ -195,7 +195,33 @@ switch ($action) {
                 }
         break;
     
+        
+        case 'category':
+            $type = filter_input(INPUT_GET, 'type', FILTER_SANITIZE_STRING);
+            $products = getProductsByCategory($type);
+            if(!count($products)){
+              $message = "<h2 class='message'>Sorry, no $type products could be found.</h2>";
+            } else {
+              $prodDisplay = buildProductsDisplay($products);
+            }
+            include '../view/category.php';
+        break;
+        
+        case 'prodInfo':
+            $id = filter_input(INPUT_GET, 'prodId', FILTER_SANITIZE_NUMBER_INT);
+            $prodInfo = getProductInfo($id);
+            if (count($prodInfo) < 1) {
+             $message = 'Sorry, no product information could be found.';
+             unset($prodInfo);
+             include '../view/product-detail.php';
+             exit;
+            }
+            $prodPage = buildSpecificProductDisplay($prodInfo);
+            include '../view/product-detail.php';
+        break;
     
+    
+        
 	default:
             $products = getProductBasics();
             if( count($products) > 0 ) {
