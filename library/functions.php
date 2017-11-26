@@ -51,7 +51,7 @@ function buildProductsDisplay($products){
     return $pd;
 }
 
-function buildSpecificProductDisplay($product){
+function buildSpecificProductDisplay($product, $thumbs){
     $spd = "<img id='spImage' src='$product[invImage]' alt='$product[invImage] Product Image'>";
             
     $spd .= "<h1 id='spName' class='spStats'>$product[invName]</h1>";
@@ -63,6 +63,10 @@ function buildSpecificProductDisplay($product){
     $spd .= "<p id='spWeight' class='spStats'>$product[invWeight] lbs. /";
     $spd .= "<span id='spSize' class='spStats'>$product[invSize] ft<sup>3</sup></span></p>";
     $spd .= "<p id='spDescription' class='spExtended'>$product[invDescription]</p>";
+
+    foreach ($thumbs as $row){
+        $spd .= "<img class='spThumbs' src='$row[imgPath]' alt='$row[imgName]'>";
+    }
     return $spd;
 }
 

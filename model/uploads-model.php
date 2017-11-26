@@ -44,7 +44,7 @@ function getImages() {
     
     $imageArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
-    return $imageArray; //reutns 2D array or entire images table along with inventory id's
+    return $imageArray; //returns 2D array or entire images table along with inventory id's
 }
 
 // Delete image information from the images table
@@ -77,3 +77,16 @@ function checkExistingImage($imgName){
     return $imageMatch;
 }
 
+function getThumbnailById($invId) {
+    $db = acmeConnect();
+    
+    $sql = 'SELECT imgId, imgPath, imgName, imgDate, inventory.invId, invName FROM images JOIN inventory ON images.invId = inventory.invId WHERE images.invId = :invId AND images.imgName LIKE "%tn%"';
+    $stmt = $db->prepare($sql);
+    
+    $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
+    $stmt->execute();
+    
+    $imageArray = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt->closeCursor();
+    return $imageArray;
+}
