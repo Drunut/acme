@@ -349,7 +349,9 @@ Category Page
 /******************
 Product Detail Page
 ******************/
-/* sp = specific product*/
+/* sp = specific product
+TODO Make the thumbnail CSS more bulletproof
+*/
 #spPage{
     display: grid;
     grid-template-columns: 1fr 3fr 3fr 1fr;
@@ -378,6 +380,7 @@ Product Detail Page
 .spThumbs{
     display: flex;
     width: 10vw;
+    max-width: 100px;
 }
 
 #spImage{

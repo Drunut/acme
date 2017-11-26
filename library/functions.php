@@ -52,7 +52,7 @@ function buildProductsDisplay($products){
 }
 
 function buildSpecificProductDisplay($product, $thumbs){
-    $spd = "<img id='spImage' src='$product[invImage]' alt='$product[invImage] Product Image'>";
+    $spd = "<img id='spImage' src='$product[invImage]' alt='$product[invName] Product Image'>";
             
     $spd .= "<h1 id='spName' class='spStats'>$product[invName]</h1>";
     $spd .= "<p id='spVendor' class='spStats'>By: $product[invVendor]</p>";
