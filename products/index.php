@@ -10,6 +10,7 @@ session_start();
 require_once '../library/connections.php';
 require_once '../model/acme-model.php';
 require_once '../model/products-model.php';
+require_once '../model/uploads-model.php';
 require_once '../library/functions.php';
 
 if(isset($_SESSION['loggedin'])){
@@ -216,7 +217,9 @@ switch ($action) {
              include '../view/product-detail.php';
              exit;
             }
-            $prodPage = buildSpecificProductDisplay($prodInfo);
+            // Get spare Thumbnails for product
+            $thumbs = getThumbnailById($prodInfo['invId']);
+            $prodPage = buildSpecificProductDisplay($prodInfo, $thumbs);
             include '../view/product-detail.php';
         break;
     

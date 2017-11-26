@@ -356,7 +356,7 @@ Product Detail Page
     grid-template-rows: auto auto auto auto auto auto auto auto 2em 1fr;
     grid-template-areas:
         ". message message ."
-        ". image image ."
+        "spThumbs image image ."
         "name name name name"
         "vendor vendor price price"
         ". . price price"
@@ -373,6 +373,11 @@ Product Detail Page
 /***************/
 #spPage .message{
     grid-area: message;
+}
+
+.spThumbs{
+    display: flex;
+    width: 10vw;
 }
 
 #spImage{
@@ -511,10 +516,10 @@ footer{
             ". image  . style style stock stock"
             ". image  . style style location location"
             ". image  . w_s w_s . ."
-            ". message . . . . ."
+            ". spThumbs . . message message ."
             "description description description description description description description";
     }
-
+    
     /**/.spAvailability{
         display: flex;
         align-items: flex-end;
