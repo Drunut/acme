@@ -35,7 +35,7 @@ $navList = createNav($categories);
 * Variables for use with the Image Upload Functionality
 * **************************************************** */
 // directory name where uploaded images are stored
-$image_dir = '/acme/uploads/images';
+$image_dir = '/acme/images/products';
 // The path is the full path from the server root
 $image_dir_path = $_SERVER['DOCUMENT_ROOT'] . $image_dir;
 
