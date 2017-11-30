@@ -45,7 +45,7 @@ function buildProductsDisplay($products){
         $pd .= '<hr>';
         $pd .= "<h2>$product[invName]</h2>";
         $pd .= "<span>$$product[invPrice]</span>";
-        $pd .= '</li></a>';
+        $pd .= '</a></li>';
     }
     $pd .= '</ul>';
     return $pd;
