@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
-        <title>Image Management</title>
+        <title>Image Management | Acme, Inc.</title>
         <?php include "../common/head.php" ?>
     </head>
 

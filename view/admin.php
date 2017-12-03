@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
-        <title>Acme</title>
+        <title>Admin | Acme, Inc.</title>
         <?php include "../common/head.php" ?>
     </head>
 

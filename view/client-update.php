@@ -6,7 +6,7 @@
 ?><!DOCTYPE html>
 <html lang="en-us">
     <head>
-        <title>Acme</title>
+        <title>Clients | Acme, Inc.</title>
         <?php include "../common/head.php" ?>
     </head>
 

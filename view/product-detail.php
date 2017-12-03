@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
-        <title>Acme</title>
+        <title><?php echo $prodInfo['invName'] ?> Details | Acme, Inc.</title>
         <?php
             include "../common/head.php";
             echo "<style> .nav_li:nth-child(".($prodInfo['categoryId'] + 1)."){ background-color: #ffffff; }  .nav_li:nth-child(".($prodInfo['categoryId'] + 1).") a{ color: #000000; } </style>"; #This keeps the nav properly highlighted
