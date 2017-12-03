@@ -94,10 +94,12 @@ header{
 
 nav{
     width: 100%;
+    color: #ffffff;
 }
-nav a:link, nav a:visited{
+
+.nav_li > a {
+    color: #ffffff;
     text-decoration: none;
-    color: initial;
 }
 
 #nav_ul{
@@ -107,12 +109,17 @@ nav a:link, nav a:visited{
     height: 10vw;
     max-height: 96px;
 }
-.nav_li:hover{
+
+.nav_li:hover, .nav_li:hover > a{
     background-color: #ffffff;
+    color: #000000;
 }
 
-#homeNav #homeNavItem{
+#homeNav #homeNavItem {
     background-color: #ffffff;
+}
+#homeNav #homeNavItem a {
+    color: #000000;
 }
 
 #currentNavItem {

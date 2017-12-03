@@ -4,7 +4,7 @@
         <title>Acme</title>
         <?php
             include "../common/head.php";
-            echo "<style> .nav_li:nth-child(".($prodInfo['categoryId'] + 1)."){ background-color: #ffffff; } </style>"; #This keeps the nav properly highlighted
+            echo "<style> .nav_li:nth-child(".($prodInfo['categoryId'] + 1)."){ background-color: #ffffff; }  .nav_li:nth-child(".($prodInfo['categoryId'] + 1).") a{ color: #000000; } </style>"; #This keeps the nav properly highlighted
         ?>
     </head>
 

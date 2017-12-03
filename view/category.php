@@ -4,7 +4,7 @@
         <title><?php echo $type; ?> Products | Acme, Inc.</title>
         <?php
             include "../common/head.php";
-            echo "<style> #$type"."NavItem { background-color: #ffffff; } </style>"; #For some cool nav highlighting
+            echo "<style> #$type"."NavItem { background-color: #ffffff; } #$type"."NavItem a{ color: #000000; }</style>"; #For some cool nav highlighting
         ?>
     </head>
 
