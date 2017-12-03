@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en-us">
     <head>
-        <title>Acme Login</title>
+        <title>Login | Acme, Inc.</title>
         <?php include "../common/head.php" ?>
     </head>
 
