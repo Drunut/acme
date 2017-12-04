@@ -24,8 +24,13 @@ function createNav($categories){
 }
 
 function createHeaderAccount($loggedin){
+    $headerAccount = '';
     if ($loggedin){
-        $headerAccount  = "<a id='headerAccount' href='/acme/accounts/index.php?action=logout'>";
+        // Check for firstname Cookie and add welcome message if it exists
+        if(isset($_COOKIE['firstname'])){
+            $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+            $headerAccount .= "<span>Welcome $cookieFirstname</span>";  };
+        $headerAccount .= "<a id='headerAccount' href='/acme/accounts/index.php?action=logout'>";
         $headerAccount .= "<img id='myAccountImg' src='/acme/images/site/account.gif' alt='My Account'>";
         $headerAccount  .= "<p>Log Out</p></a>";
     } else {

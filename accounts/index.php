@@ -121,6 +121,10 @@ switch ($action) {
             array_pop($clientData);
             // Store the array into the session
             $_SESSION['clientData'] = $clientData;
+            //Delete cookie if it exists
+            if(isset($_COOKIE['firstname'])){
+                setcookie('firstname', '' , time()-3600, '/');
+            }
             //Add in the cookie
             setcookie('firstname', $clientData['clientFirstname'], strtotime('+1 year'), '/');
             // Send them to the admin view
