@@ -41,8 +41,13 @@ switch ($action) {
 		include "../view/registration.php";
 		break;
         case 'admin':
-                include "../view/admin.php";
-                break;
+                if ($_SESSION['loggedin']){
+                    include "../view/admin.php";
+                    break;
+                } else {
+                    include "../view/home.php";
+                    break;
+                }
         case 'modify':
                 include "../view/client-update.php";
                 break;

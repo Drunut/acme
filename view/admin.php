@@ -30,7 +30,7 @@
 
         <main>
             <?php
-                echo "<h1>Welcome, ".$clientData['clientFirstname']."</h1>";
+                echo "<h1>Welcome, ".$clientData['clientFirstname'].".<br>You are logged in.</h1>";
                 if (isset($message)){ echo $message; }
                 echo "<ul id='adminUserData'>";
                   
