@@ -68,7 +68,7 @@ function buildSpecificProductDisplay($product, $thumbs){
     $spd .= "<p id='spWeight' class='spStats'>$product[invWeight] lbs. /";
     $spd .= "<span id='spSize' class='spStats'>$product[invSize] ft<sup>3</sup></span></p>";
     $spd .= "<p id='spDescription' class='spExtended'>$product[invDescription]</p>";
-
+    $spd .= "<p id='spReviews' class='spExtended'>I like chocolate Milk</p>";
     foreach ($thumbs as $row){
         $spd .= "<img class='spThumbs' src='$row[imgPath]' alt='$row[imgName]'>";
     }

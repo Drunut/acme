@@ -373,7 +373,8 @@ TODO Make the thumbnail CSS more bulletproof
         "style style location location"
         "w_s w_s . ."
         ". . . ."
-        "description description description description";
+        "description description description description"
+        "reviews reviews reviews reviews reviews reviews reviews";
     justify-content: center;
     
     margin: 0 2.5% 2em 2.5%;
@@ -464,6 +465,13 @@ TODO Make the thumbnail CSS more bulletproof
         background-color: lightgray;
 /**/}
 
+#spReviews{
+    grid-area: reviews;
+    padding: 1em;
+    margin-top: 1em;
+    background-color: lightgray;
+}
+
 
 
 
@@ -527,7 +535,8 @@ footer{
             ". image  . style style location location"
             ". image  . w_s w_s . ."
             ". spThumbs . . message message ."
-            "description description description description description description description";
+            "description description description description description description description"
+            "reviews reviews reviews reviews reviews reviews reviews";
     }
     
     /**/.spAvailability{

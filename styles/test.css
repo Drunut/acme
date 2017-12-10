@@ -1,0 +1,74 @@
+/***********************************************************
+Personally condensed Meyerweb CSS Reset originally found at:
+http://meyerweb.com/eric/tools/css/reset/
+v2.0 | 20110126
+License: none (public domain)
+*****************************/
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, img, ol, ul, li, article, aside, figure, figcaption, footer, header, nav, section{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+}
+body {
+    line-height: 1;
+    overflow-x: hidden;
+}
+ol, ul {
+    list-style: none;
+}
+/**************************
+End Modified Meyerweb Reset
+**************************/
+
+
+body{
+    font-size: 15.6px;
+    font-family: "Comic Sans MS", cursive, sans-serif;
+    /* justify-content: center;
+    /* These two rules make the floatFrame sit in the middle of the page for @media later. */
+    /* align-items: center; */
+
+    background-image:  url(../images/site/background.jpg) /* Whatever I want what's behind the floatFrame to be */;
+    display: flex;
+    justify-content: center;
+}
+
+#floatFrame{
+    margin: 0 3.5% 7% 3.5%;
+    
+    background-color: #ffffff; /* Color of the content area */
+    width: 93%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+
+
+
+/****************************************************************************************************/
+                                            /* FOOTER */
+/****************************************************************************************************/
+footer{
+    font-size: 2.6vw;
+    text-align: center;
+}
+#footerList{
+    background-color: rgba(0, 0, 0, 0.35);
+    padding: 10px 0 10px 0; /* Gives the top and bottom some space */
+    display: flex; /* So I can edit the positioning more easily. */
+    flex-flow: column;
+    
+}
+/****************************************************************************************************/
+                                        /* MEDIA QUERIES*/
+/****************************************************************************************************/
+@media (min-width: 41.67em) {
+
+}
+@media (min-width: 60em){
+    /* Whatever attributes for desktop size */
+    
+}
