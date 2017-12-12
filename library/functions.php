@@ -58,21 +58,49 @@ function buildProductsDisplay($products){
 
 function buildSpecificProductDisplay($product, $thumbs){
     $spd = "<img id='spImage' src='$product[invImage]' alt='$product[invName] Product Image'>";
-            
-    $spd .= "<h1 id='spName' class='spStats'>$product[invName]</h1>";
-    $spd .= "<p id='spVendor' class='spStats'>By: $product[invVendor]</p>";
-    $spd .= "<p id='spPrice' class='spAvailability'>$$product[invPrice]</p>";
-    $spd .= "<p id='spStock' class='spAvailability'>$product[invStock] in stock</p>";
-    $spd .= "<p id='spLocation' class='spAvailability'>Ships from:<br>$product[invLocation]</p>";
-    $spd .= "<p id='spStyle' class='spStats'>$product[invStyle]<span>style</span></p>";
-    $spd .= "<p id='spWeight' class='spStats'>$product[invWeight] lbs. /";
-    $spd .= "<span id='spSize' class='spStats'>$product[invSize] ft<sup>3</sup></span></p>";
-    $spd .= "<p id='spDescription' class='spExtended'>$product[invDescription]</p>";
-    $spd .= "<p id='spReviews' class='spExtended'>I like chocolate Milk</p>";
+    
+    $spd .=        "<section id='spThumbs'>";
     foreach ($thumbs as $row){
-        $spd .= "<img class='spThumbs' src='$row[imgPath]' alt='$row[imgName]'>";
+        $spd .= "<img src='$row[imgPath]' alt='$row[imgName]'>";
     }
-    return $spd;
+    $spd .=     "</section>";
+            
+    $spd .=     "<h1 id='spName'>$product[invName]</h1>";
+    $spd .=     "<section id='spStats'>";
+    $spd .=     "    <p id='spVendor'>By: $product[invVendor]</p>";
+    $spd .=     "    <div>";
+    $spd .=     "        <p id='spStyle'>$product[invStyle]<span>style</span> </p>";
+    $spd .=     "        <p id='spWeight'>$product[invWeight] lbs. /<span id='spSize'>$product[invSize] ft<sup>3</sup></span> </p>";
+    $spd .=     "    </div>";
+    $spd .=     "</section>";
+            
+    $spd .=     "<section id='spAvailability'>";
+    $spd .=     "    <p id='spPrice'>$$product[invPrice]</p>";
+    $spd .=     "    <p id='spStock'>$product[invStock] in stock</p>";
+    $spd .=     "    <p id='spLocation'>      Ships from:<br>$product[invLocation]</p>";
+    $spd .=     "</section>";
+            
+    // The 'see review at bottom of page' block is on the page itself because it needs to optionally include a message
+            
+    $spd .=     "<section id='spExtended'>";
+    $spd .=     "    <p id='spDescription'>$product[invDescription]</p>";
+    $spd .=     "    <section id='spReviewSection'>";
+    $spd .=     "        <h2>Customer Reviews</h2>";
+    $spd .=     "        <sub>Review the Monster Rubber Band</sub>";
+    $spd .=     "        <article class='spReview'>";
+    $spd .=     "            <h3 class='author'>TSawyer</h3>";
+    $spd .=     "            <p class='timestamp'>wrote on 10 March, 2017:</p>";
+    $spd .=     "            <p class='comment'>This is wonderful. You can catch an elephant with this thing!</p>";
+    $spd .=     "        </article>";
+    $spd .=     "        <article class='spReview'>";
+    $spd .=     "            <h3 class='author'>TSawyer</h3>";
+    $spd .=     "            <p class='timestamp'>wrote on 10 March, 2017:</p>";
+    $spd .=     "            <p class='comment'>This is wonderful. You can catch an elephant with this thing!</p>";
+    $spd .=     "        </article>";
+    $spd .=     "    </section>";
+                
+    $spd .=     "</section>";
+    return $spd; 
 }
 
 

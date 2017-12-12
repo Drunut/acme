@@ -24,7 +24,11 @@
         </header>
         <main id="spPage">
             <?php
-                if(isset($message)){ echo $message; }
+                if(isset($message)){
+                    echo "<section id='spMessage'>$message</section>";
+                } else {
+                    echo "<section id='spMessage'><p>Reviews can be found at the bottom of the page</p></section>";
+                }
                 if(isset($prodPage)){ echo $prodPage; }
             ?>
             

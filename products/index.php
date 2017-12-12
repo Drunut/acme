@@ -212,7 +212,7 @@ switch ($action) {
             $id = filter_input(INPUT_GET, 'prodId', FILTER_SANITIZE_NUMBER_INT);
             $prodInfo = getProductInfo($id);
             if (count($prodInfo) < 1) {
-             $message = 'Sorry, no product information could be found.';
+             $message = "<h2 class='message'>Sorry, no product information could be found.</h2>";
              unset($prodInfo);
              include '../view/product-detail.php';
              exit;
