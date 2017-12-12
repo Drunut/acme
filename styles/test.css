@@ -48,6 +48,171 @@ body{
 
 
 
+
+
+
+#spPage{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-column-gap: 2.5vmin;
+    grid-template-areas:
+        "image image"
+        "thumbs thumbs"
+        "name name"
+        "stats availability"
+        "stats availability"
+        "stats . "
+        "message message"
+        "extended extended";
+    
+    
+    margin: 2vmin;
+}
+/***********************************Image**************************************/
+#spImage{
+    grid-area: image;
+    max-width: 100%;
+    justify-self: center;
+}
+
+#spThumbs{
+    grid-area:thumbs;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: no-wrap;
+    justify-content: center;
+}
+#spThumbs img{
+    max-width: 15vmin;
+    max-height: 15vmin;
+}
+
+#spName{
+    grid-area: name;
+    font-size: 2em;
+    background-color: lightgrey;
+    padding: 1vmin 1vmin 1vmin 0.5vmin;
+}
+/***********************************Stats**************************************/
+#spStats{
+    grid-area: stats;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/**/#spVendor{
+        font-style: italic;
+        margin-bottom: 4vmin;
+/**/}
+
+/**/#spStyle{
+/**/    font-size: 1.5em;
+/**/}
+/****/#spStyle span{
+        padding-left: 2vmin;
+/****/    font-size: 1rem;
+/****/}
+
+/**/#spWeight{
+/**/    font-size: 0.9em;
+        margin-left: 1em;
+        font-style: italic;
+/**/}
+/****/#spSize{
+/****/    padding-left: 5%;
+/****/}
+/********************************Availability**********************************/
+#spAvailability{
+    grid-area: availability;
+    display:flex;
+    flex-direction: column;
+    align-items: cross-start;
+    
+    text-align: right;
+    margin: 6vmin 0 6vmin 0;
+}
+#spPrice{
+    font-size: 1.7em;
+    color: #de2226;
+    font-weight: bold;
+}
+#spStock{
+    color: green;
+    font-size: 1.3em;
+}
+#spLocation{
+    font-style: italic;
+}
+
+/************************************Message***********************************/
+#spMessage{
+    grid-area: message;
+    min-height: 3vmin;
+    text-align: center;
+    
+    margin: 2vmin 0 0 0;
+    border-top: solid lightgrey;
+    border-bottom: solid lightgrey;
+    padding: 2vmin 0 2vmin 0;
+}
+
+/***********************************Extended***********************************/
+#spExtended{
+    grid-area: extended;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    margin: 2vmin 0 0 0;
+}
+/**/#spDescription{
+/**/    padding: 1em;
+        background-color: lightgray;
+/**/}
+
+/**/#spReviewSection{
+/**/    margin: 2vmin 0 0 0;
+        padding: 1em;
+        background-color: khaki;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+/**/}
+#spReviewSection > h2{
+    font-size: 1.8em;
+}
+#spReviewSection > sub{
+    font-size: 1.05em;
+}
+
+.spReview{
+    display: flex;
+    flex-wrap: wrap;
+    font-family: sans-serif;
+    margin-top: 6vmin;
+}
+.spReview .author{
+    flex-grow: 0;
+    margin-right: 1em;
+    font-size: 1.25em;
+}
+.spReview .timestamp{
+    flex-grow: 0;
+    font-size: .75em;
+    font-style: italic;
+    
+    align-self: flex-end;
+}
+.spReview .comment{
+    flex-grow: 1;
+    padding: 1.5vmin;
+    background-color: white;
+}
+
+
 /****************************************************************************************************/
                                             /* FOOTER */
 /****************************************************************************************************/
@@ -66,7 +231,40 @@ footer{
                                         /* MEDIA QUERIES*/
 /****************************************************************************************************/
 @media (min-width: 41.67em) {
-
+    
+    #spPage{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-column-gap: 2.5vmin;
+        grid-template-areas:
+            "image name name"
+            "image stats availability"
+            "image . availability"
+            "thumbs . ."
+            "message message message"
+            "extended extended extended";
+        margin: 2vmin;
+    }
+    
+    #spImage{
+        grid-area: image;
+        max-width: 100%;
+    }
+    #spThumbs img{
+        max-width: 10vmin;
+        max-height: 10vmin;
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 }
 @media (min-width: 60em){
     /* Whatever attributes for desktop size */
