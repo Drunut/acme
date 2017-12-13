@@ -18,16 +18,17 @@ $categories = getCategories();
 // Modularized the Header stuff since it was getting used across three controllers
 if(isset($_SESSION['loggedin'])){
     $headerAccount = createHeaderAccount(true);
+    $clientData = $_SESSION['clientData'];
+    // Get user reviews
+    $clientReviews = getClientReviews($clientData['clientId']);
 } else {
     $headerAccount = createHeaderAccount(false);
 }
 
-if(isset($_SESSION['clientData'])){
-    $clientData = $_SESSION['clientData'];
-}
 
 // Build a navigation bar using the $categories array
 $navList = createNav($categories);
+
 
 
 $action = filter_input(INPUT_POST, 'action');
@@ -44,7 +45,6 @@ switch ($action) {
 		break;
         case 'admin':
                 if ($_SESSION['loggedin']){
-                    // Get user reviews
                     $clientReviews = getClientReviews($clientData['clientId']);
                     include "../view/admin.php";
                     break;
