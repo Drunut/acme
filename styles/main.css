@@ -393,7 +393,7 @@ Product Detail Page
     grid-area:thumbs;
     display: flex;
     flex-direction: row;
-    flex-wrap: no-wrap;
+    flex-wrap: nowrap;
     justify-content: center;
 }
 #spThumbs img{
@@ -441,7 +441,7 @@ Product Detail Page
     grid-area: availability;
     display:flex;
     flex-direction: column;
-    align-items: cross-start;
+    align-items: flex-start;
     
     text-align: right;
     margin: 6vmin 0 6vmin 0;

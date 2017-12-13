@@ -63,7 +63,8 @@
                     $spd .=     "</li>";
                     echo $spd;
                 }
-                echo "</ul>"
+                echo "</ul>";
+                echo "</section>";
 ?>
             
             

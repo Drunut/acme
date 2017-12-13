@@ -25,11 +25,11 @@
                 ?>
             <form action="/acme/accounts/index.php" id="loginForm" method="post">
                 <label for="clientEmail">Email Address</label>
-                <input type="email" id="email" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";} ?> required>
+                <input type="email" id="clientEmail" name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";} ?> required>
                 
                 <label for="clientPassword">Password</label>
                 <p id="passwordReq">8+ characters in length, with at least 1 number, 1 capital letter and 1 special character</p>
-                <input type="password" class="pwdbtn" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
+                <input type="password" id="clientPassword" class="pwdbtn" name="clientPassword" pattern="(?=^.{8,}$)(?=.*\d)(?=.*\W+)(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$" required>
                 
                 <input type="hidden" name="action" value="submitLogin">
                 <input type="submit" value="Login">
