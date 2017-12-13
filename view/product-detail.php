@@ -24,7 +24,16 @@
         </header>
         <main id="spPage">
             <?php
-                if(isset($message)){ echo $message; }
+                $pageMessage = "<section id='spMessage'>";
+                if (isset($_SESSION['message'])){
+                    $pageMessage .= $_SESSION['message'];
+                    unset($_SESSION['message']);
+                } else if(isset($message)){
+                    $pageMessage .= $message;
+                }
+                $pageMessage .= "<p>Reviews can be found at the bottom of the page</p>";
+                $pageMessage .= '</section>';
+                echo $pageMessage;
                 if(isset($prodPage)){ echo $prodPage; }
             ?>
             

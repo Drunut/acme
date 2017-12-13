@@ -24,8 +24,13 @@ function createNav($categories){
 }
 
 function createHeaderAccount($loggedin){
+    $headerAccount = '';
     if ($loggedin){
-        $headerAccount  = "<a id='headerAccount' href='/acme/accounts/index.php?action=logout'>";
+        // Check for firstname Cookie and add welcome message if it exists
+        if(isset($_COOKIE['firstname'])){
+            $cookieFirstname = filter_input(INPUT_COOKIE, 'firstname', FILTER_SANITIZE_STRING);
+            $headerAccount .= "<a href='/acme/accounts/index.php?action=admin'>Welcome $cookieFirstname</a>";  };
+        $headerAccount .= "<a id='headerAccount' href='/acme/accounts/index.php?action=logout'>";
         $headerAccount .= "<img id='myAccountImg' src='/acme/images/site/account.gif' alt='My Account'>";
         $headerAccount  .= "<p>Log Out</p></a>";
     } else {
@@ -51,23 +56,94 @@ function buildProductsDisplay($products){
     return $pd;
 }
 
-function buildSpecificProductDisplay($product, $thumbs){
+function buildSpecificProductDisplay($product, $thumbs, $itemReviews){
     $spd = "<img id='spImage' src='$product[invImage]' alt='$product[invName] Product Image'>";
-            
-    $spd .= "<h1 id='spName' class='spStats'>$product[invName]</h1>";
-    $spd .= "<p id='spVendor' class='spStats'>By: $product[invVendor]</p>";
-    $spd .= "<p id='spPrice' class='spAvailability'>$$product[invPrice]</p>";
-    $spd .= "<p id='spStock' class='spAvailability'>$product[invStock] in stock</p>";
-    $spd .= "<p id='spLocation' class='spAvailability'>Ships from:<br>$product[invLocation]</p>";
-    $spd .= "<p id='spStyle' class='spStats'>$product[invStyle]<span>style</span></p>";
-    $spd .= "<p id='spWeight' class='spStats'>$product[invWeight] lbs. /";
-    $spd .= "<span id='spSize' class='spStats'>$product[invSize] ft<sup>3</sup></span></p>";
-    $spd .= "<p id='spDescription' class='spExtended'>$product[invDescription]</p>";
-
+    
+    $spd .=     "<section id='spThumbs'>";
     foreach ($thumbs as $row){
-        $spd .= "<img class='spThumbs' src='$row[imgPath]' alt='$row[imgName]'>";
+        $spd .= "   <img src='$row[imgPath]' alt='$row[imgName]'>";
     }
-    return $spd;
+    $spd .=     "</section>";
+            
+    $spd .=     "<h1 id='spName'>$product[invName]</h1>";
+    $spd .=     "<section id='spStats'>";
+    $spd .=     "    <p id='spVendor'>By: $product[invVendor]</p>";
+    $spd .=     "    <div>";
+    $spd .=     "        <p id='spStyle'>$product[invStyle]<span>style</span> </p>";
+    $spd .=     "        <p id='spWeight'>$product[invWeight] lbs. /<span id='spSize'>$product[invSize] ft<sup>3</sup></span> </p>";
+    $spd .=     "    </div>";
+    $spd .=     "</section>";
+            
+    $spd .=     "<section id='spAvailability'>";
+    $spd .=     "    <p id='spPrice'>$$product[invPrice]</p>";
+    $spd .=     "    <p id='spStock'>$product[invStock] in stock</p>";
+    $spd .=     "    <p id='spLocation'>      Ships from:<br>$product[invLocation]</p>";
+    $spd .=     "</section>";
+            
+    // The 'see review at bottom of page' block is on the page itself because it needs to optionally include a message
+    if(isset($_SESSION['loggedin'])){
+        $headerAccount = createHeaderAccount(true);
+    } else {
+        $headerAccount = createHeaderAccount(false);
+    }
+            
+    $spd .=     "<section id='spExtended'>";
+    $spd .=     "    <p id='spDescription'>$product[invDescription]</p>";
+    $spd .=     "    <section id='spReviewSection'>";
+    $spd .=     "       <h2>Customer Reviews</h2>";
+    if(isset($_SESSION['loggedin'])){
+        $spd .= "<sub>Review the $product[invName]:</sub>";
+        
+        //All the review form stuff
+        $clientData = $_SESSION['clientData'];
+        $first = $clientData['clientFirstname'];
+        $last = $clientData['clientLastname'];
+        $username = substr($first, 0, 1).$last;
+        
+        //This form goes to the reviews controller with action=addReview
+        //Passes reviewField, clientId, InvId
+        $spd .="<form action='/acme/reviews/index.php' id='reviewForm' method='post'>";
+        $spd .="<p>Name: $username</p>";
+
+        $spd .="<label for='reviewField'>Review:</label>";
+        $spd .="<textarea id='reviewField' name='reviewField' rows='4' required>";
+            if( isset($invDescription) ){                   $spd .= $invDescription;
+            } elseif( isset($prodInfo['invDescription']) ){ $spd .= $prodInfo['invDescription']; }
+        $spd .="</textarea>";
+        $spd .="<input type='hidden' name='invId' value='";
+            $spd .= $product['invId'];
+            $spd .="'>";
+        $spd .="<input type='hidden' name='clientId' value='";
+            if(isset($clientData['clientId'])){ $spd .= $clientData['clientId'];    }
+            $spd .= "'>";
+        $spd .="<input type='hidden' name='action' value='addReview'>";
+
+        $spd .="<input type='submit' value='Submit'>";
+        $spd .="</form>";
+        
+    } else {
+        $spd .= "       <sub><a href='/acme/accounts/index.php?action=login'>Log in</a> to leave a review!</sub>";
+    }
+    $spd .=     "       <section id='spReviews'>";
+    foreach ($itemReviews as $row){
+                //Insert the item reviews
+                //Reviews are listed most recent first thanks to 'ORDER BY reviewDate DESC' in SQL query
+                $rFirst = $row['clientFirstname'];
+                $rLast = $row['clientLastname'];
+                $rUsername = substr($rFirst, 0, 1).$rLast;
+                $rDate = date('j F Y', strtotime($row['reviewDate']) );
+
+                $spd .=     "<article class='spReview'>";
+                $spd .=     "   <h3 class='author'>$rUsername</h3>";
+                $spd .=     "   <p class='timestamp'>written on $rDate:</p>";
+                $spd .=     "   <p class='comment'>$row[reviewText]</p>";
+                $spd .=     "</article>";
+    }
+    $spd .=     "       </section>";
+    $spd .=     "    </section>";
+                
+    $spd .=     "</section>";
+    return $spd; 
 }
 
 

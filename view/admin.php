@@ -30,8 +30,8 @@
 
         <main>
             <?php
-                echo "<h1>Welcome, ".$clientData['clientFirstname']."</h1>";
-                if (isset($message)){ echo $message; }
+                echo "<h1>Welcome, ".$clientData['clientFirstname'].".<br>You are logged in.</h1>";
+                if (isset($_SESSION['message'])){ echo $_SESSION['message']; unset($_SESSION['message']); } else if (isset($message)){ echo $message; }
                 echo "<ul id='adminUserData'>";
                   
                 echo "<li>User Id: ".$clientData['clientId']."</li>";
@@ -47,6 +47,23 @@
                     echo "<h2 id='adminModify'>Use the link below to Modify the Products or Categories:</h2>";
                     echo "<p><a href='/acme/products/'>Add new Products or Categories</a></p>";
                 }
+                echo "</section>";
+                
+                echo "<section id='clientReviews'>";
+                echo "<h2>Your Reviews</h2>";
+                echo "<ul id='clientReviewsList'>";
+                foreach ($clientReviews as $row){
+                    $rDate = date('F j Y', strtotime($row['reviewDate']) );
+                    $spd  =     "<li class='clientReview'>";
+                    $spd .=     "   <h3 class='item'>$row[invName] Review</h3>";
+                    $spd .=     "   <p class='timestamp'>written on $rDate:</p>";
+                    $spd .=     "   <p class='comment'>$row[reviewText]</p>";
+                    $spd .=     "   <p class='actions'><a href='/acme/reviews/index.php?action=editReview&reviewId=$row[reviewId]'>Edit</a> | "
+                            .   "<a href='/acme/reviews/index.php?action=confirmReviewDelete&reviewId=$row[reviewId]'>Delete</a></p>";
+                    $spd .=     "</li>";
+                    echo $spd;
+                }
+                echo "</ul>";
                 echo "</section>";
 ?>
             

@@ -24,10 +24,10 @@
                     if (isset($message)){ echo $message; }
                 ?>
             <form action="/acme/accounts/index.php" id="registrationForm" method="post">
-                <label for="clientFirstName">First name*</label>
-                <input type="text" id="clientFirstName" name="clientFirstName" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
-                <label for="clientLastName">Last name*</label>
-                <input type="text" id="clientLastName" name="clientLastName" <?php if(isset($clientLastname)){echo "value='$clientLastname'";} ?> required>
+                <label for="clientFirstname">First name*</label>
+                <input type="text" id="clientFirstname" name="clientFirstname" <?php if(isset($clientFirstname)){echo "value='$clientFirstname'";} ?> required>
+                <label for="clientLastname">Last name*</label>
+                <input type="text" id="clientLastname" name="clientLastname" <?php if(isset($clientLastname)){echo "value='$clientLastname'";} ?> required>
                 
                 <label for="clientEmail">Email Address*</label>
                 <input type="email" id='clientEmail' name="clientEmail" <?php if(isset($clientEmail)){echo "value='$clientEmail'";} ?> required>

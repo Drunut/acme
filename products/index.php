@@ -12,6 +12,7 @@ require_once '../model/acme-model.php';
 require_once '../model/products-model.php';
 require_once '../model/uploads-model.php';
 require_once '../library/functions.php';
+require_once '../model/reviews-model.php';
 
 if(isset($_SESSION['loggedin'])){
     $headerAccount = createHeaderAccount(true);
@@ -212,14 +213,17 @@ switch ($action) {
             $id = filter_input(INPUT_GET, 'prodId', FILTER_SANITIZE_NUMBER_INT);
             $prodInfo = getProductInfo($id);
             if (count($prodInfo) < 1) {
-             $message = 'Sorry, no product information could be found.';
+             $message = "<h2 class='message'>Sorry, no product information could be found.</h2>";
              unset($prodInfo);
              include '../view/product-detail.php';
              exit;
             }
             // Get spare Thumbnails for product
             $thumbs = getThumbnailById($prodInfo['invId']);
-            $prodPage = buildSpecificProductDisplay($prodInfo, $thumbs);
+            // Get Reviews for product
+            $itemReviews = getItemReviews($prodInfo['invId']);
+            $prodPage = buildSpecificProductDisplay($prodInfo, $thumbs, $itemReviews);
+            
             include '../view/product-detail.php';
         break;
     

@@ -301,6 +301,13 @@ Admin Page
     margin: 1em 0 .25em 0;
 }
 
+/*Formatting for the comments is found in specific product page rules below
+Exept for the rules found here */
+
+.clientReview .actions{
+    padding-top: 0.5vmin;
+}
+
 
 /***************************
 Random Garbage Table Styling I shamelessly lifted off w3schools and tweaked
@@ -356,113 +363,181 @@ Category Page
 /******************
 Product Detail Page
 ******************/
-/* sp = specific product
-TODO Make the thumbnail CSS more bulletproof
-*/
+/* sp = specific product */
 #spPage{
     display: grid;
-    grid-template-columns: 1fr 3fr 3fr 1fr;
-    grid-template-rows: auto auto auto auto auto auto auto auto 2em 1fr;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+    grid-column-gap: 2.5vmin;
     grid-template-areas:
-        ". message message ."
-        "spThumbs image image ."
-        "name name name name"
-        "vendor vendor price price"
-        ". . price price"
-        "style style stock stock"
-        "style style location location"
-        "w_s w_s . ."
-        ". . . ."
-        "description description description description";
-    justify-content: center;
+        "image image"
+        "thumbs thumbs"
+        "name name"
+        "stats availability"
+        "stats availability"
+        "stats . "
+        "message message"
+        "extended extended";
     
-    margin: 0 2.5% 2em 2.5%;
     
+    margin: 2vmin;
 }
-/***************/
-#spPage .message{
-    grid-area: message;
-}
-
-.spThumbs{
-    display: flex;
-    width: 10vw;
-    max-width: 100px;
-}
-
+/***********************************Image**************************************/
 #spImage{
     grid-area: image;
-    width: 100%;
-    margin: 2em 0 1em 0;
+    max-width: 100%;
+    justify-self: center;
 }
 
-.spStats:not(#spName){
+#spThumbs{
+    grid-area:thumbs;
     display: flex;
-    align-items: flex-end;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
 }
-/**/#spName{
-/**/    grid-area: name;
-        margin: 0;
-        padding: 0.2em;
-        padding-left: 0;
-        
-        background-color: lightgrey;
-/**/}
+#spThumbs img{
+    max-width: 15vmin;
+    max-height: 15vmin;
+}
+
+#spName{
+    grid-area: name;
+    font-size: 2em;
+    background-color: lightgrey;
+    padding: 1vmin 1vmin 1vmin 0.5vmin;
+}
+/***********************************Stats**************************************/
+#spStats{
+    grid-area: stats;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 /**/#spVendor{
-/**/    grid-area: vendor;
         font-style: italic;
+        margin-bottom: 4vmin;
 /**/}
-/**/.spAvailability{
-        text-align: right;
-/**/}
-/**//**/#spPrice{
-/**//**/    grid-area: price;
-            font-size: 1.7em;
-            color: #de2226;
-            font-weight: bold;
-/**//**/}
-/**//**/#spStock{
-/**//**/    grid-area: stock;
-            color: green;
-            font-size: 1.3em;
-            margin-bottom: 0.2em;
-/**//**/}
-/**//**/#spLocation{
-/**//**/    grid-area: location;
-            font-style: italic;
-/**//**/}
-/**/
+
 /**/#spStyle{
-/**/    grid-area: style;
-        display: flex;
-        align-items: flex-end;
-        font-size: 1.5em;
-        margin-bottom: 0.2em;
-        
+/**/    font-size: 1.5em;
 /**/}
-/**/#spStyle span{
-        padding-left: 5%;
-/**/    font-size: 1rem;
-/**/}
+/****/#spStyle span{
+        padding-left: 2vmin;
+/****/    font-size: 1rem;
+/****/}
+
 /**/#spWeight{
-/**/    grid-area: w_s;
-        font-size: 0.9em;
+/**/    font-size: 0.9em;
         margin-left: 1em;
         font-style: italic;
 /**/}
 /****/#spSize{
-/****/    grid-area: w_s;
-          padding-left: 5%;
+/****/    padding-left: 5%;
 /****/}
-
-.spExtended{
+/********************************Availability**********************************/
+#spAvailability{
+    grid-area: availability;
+    display:flex;
+    flex-direction: column;
+    align-items: flex-start;
     
+    text-align: right;
+    margin: 6vmin 0 6vmin 0;
+}
+#spPrice{
+    font-size: 1.7em;
+    color: #de2226;
+    font-weight: bold;
+}
+#spStock{
+    color: green;
+    font-size: 1.3em;
+}
+#spLocation{
+    font-style: italic;
+}
+
+/************************************Message***********************************/
+#spMessage{
+    grid-area: message;
+    min-height: 3vmin;
+    text-align: center;
+    
+    margin: 2vmin 0 0 0;
+    border-top: solid lightgrey;
+    border-bottom: solid lightgrey;
+    padding: 2vmin 0 2vmin 0;
+}
+
+/***********************************Extended***********************************/
+#spExtended{
+    grid-area: extended;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    margin: 2vmin 0 0 0;
 }
 /**/#spDescription{
-/**/    grid-area: description;
-        padding: 1em;
+/**/    padding: 1em;
         background-color: lightgray;
 /**/}
+
+/**/#spReviewSection, #clientReviews{
+/**/    margin: 2vmin 0 0 0;
+        padding: 1em;
+        background-color: khaki;
+        
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+/**/}
+#spReviewSection > h2, #clientReviews > h2{
+    font-size: 1.8em;
+}
+#spReviewSection > sub{
+    font-size: 1.05em;
+}
+
+#spReviews, #clientReviews{
+    border-top: 3px black solid;
+    margin-top: 2vmin;
+}
+
+/*The form*/
+#reviewForm{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.spReview, .clientReview{
+    display: flex;
+    flex-wrap: wrap;
+    font-family: sans-serif;
+    margin-top: 4vmin;
+}
+.spReview .author, .clientReview .item{
+    flex-grow: 0;
+    margin-right: 1em;
+    font-size: 1.25em;
+}
+.spReview .timestamp, .clientReview .timestamp{
+    flex-grow: 0;
+    font-size: .75em;
+    font-style: italic;
+    
+    align-self: flex-end;
+}
+.spReview .comment, .clientReview .comment{
+    flex-grow: 1;
+    padding: 1.5vmin;
+    background-color: white;
+    flex-basis: 100%;
+    margin-top: 0.1vmin;
+}
 
 
 
@@ -517,27 +592,27 @@ footer{
     ******************/
     /* sp = specific product*/
     #spPage{
-        grid-template-columns: 1fr 6fr 1fr 1fr 3fr 3fr 1fr;
-        grid-template-rows: auto auto auto auto auto auto 2em 1fr;
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto;
+        grid-column-gap: 2.5vmin;
         grid-template-areas:
-            ". image  . name name name name"
-            ". image  . vendor vendor price price"
-            ". image  . . . price price"
-            ". image  . style style stock stock"
-            ". image  . style style location location"
-            ". image  . w_s w_s . ."
-            ". spThumbs . . message message ."
-            "description description description description description description description";
+            "image name name"
+            "image stats availability"
+            "image . availability"
+            "thumbs . ."
+            "message message message"
+            "extended extended extended";
+        margin: 2vmin;
     }
     
-    /**/.spAvailability{
-        display: flex;
-        align-items: flex-end;
-        justify-content: flex-end;
-    /**/}
-    /**//**/#spPrice, #spLocation, #spWeight, #spVendor{
-    /**//**/    align-self: flex-start;
-    /**//**/}
+    #spImage{
+        grid-area: image;
+        max-width: 100%;
+    }
+    #spThumbs img{
+        max-width: 10vmin;
+        max-height: 10vmin;
+    }
 }
 @media (min-width: 60em){
     /* Whatever attributes for desktop size */

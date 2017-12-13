@@ -11,21 +11,24 @@ require_once '../model/accounts-model.php';
 require_once '../library/functions.php';
 // Get the acme model for use as needed
 require_once '../model/acme-model.php';
+// Get the review model so we can see user reviews
+require_once '../model/reviews-model.php';
 $categories = getCategories();
 
 // Modularized the Header stuff since it was getting used across three controllers
 if(isset($_SESSION['loggedin'])){
     $headerAccount = createHeaderAccount(true);
+    $clientData = $_SESSION['clientData'];
+    // Get user reviews
+    $clientReviews = getClientReviews($clientData['clientId']);
 } else {
     $headerAccount = createHeaderAccount(false);
 }
 
-if(isset($_SESSION['clientData'])){
-    $clientData = $_SESSION['clientData'];
-}
 
 // Build a navigation bar using the $categories array
 $navList = createNav($categories);
+
 
 
 $action = filter_input(INPUT_POST, 'action');
@@ -41,8 +44,14 @@ switch ($action) {
 		include "../view/registration.php";
 		break;
         case 'admin':
-                include "../view/admin.php";
-                break;
+                if ($_SESSION['loggedin']){
+                    $clientReviews = getClientReviews($clientData['clientId']);
+                    include "../view/admin.php";
+                    break;
+                } else {
+                    include "../view/home.php";
+                    break;
+                }
         case 'modify':
                 include "../view/client-update.php";
                 break;
@@ -121,10 +130,16 @@ switch ($action) {
             array_pop($clientData);
             // Store the array into the session
             $_SESSION['clientData'] = $clientData;
+            //Delete cookie if it exists
+            if(isset($_COOKIE['firstname'])){
+                setcookie('firstname', '' , time()-3600, '/');
+            }
             //Add in the cookie
             setcookie('firstname', $clientData['clientFirstname'], strtotime('+1 year'), '/');
             // Send them to the admin view
             $message = "<h2 class='message'>You are now logged in</h2>";
+            // Get user reviews
+            $clientReviews = getClientReviews($clientData['clientId']);
             include '../view/admin.php';
             exit;
         case 'logout':
