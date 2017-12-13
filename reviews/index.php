@@ -38,6 +38,7 @@ if ($action == NULL){
 switch ($action) {
         //Add a new Review
 	case 'addReview':
+            //Form passes reviewField, clientId, InvId
             include "../view/_______.php";
             break;
         //Deliver a view to edit a review

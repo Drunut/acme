@@ -56,12 +56,12 @@ function buildProductsDisplay($products){
     return $pd;
 }
 
-function buildSpecificProductDisplay($product, $thumbs){
+function buildSpecificProductDisplay($product, $thumbs, $itemReviews){
     $spd = "<img id='spImage' src='$product[invImage]' alt='$product[invName] Product Image'>";
     
-    $spd .=        "<section id='spThumbs'>";
+    $spd .=     "<section id='spThumbs'>";
     foreach ($thumbs as $row){
-        $spd .= "<img src='$row[imgPath]' alt='$row[imgName]'>";
+        $spd .= "   <img src='$row[imgPath]' alt='$row[imgName]'>";
     }
     $spd .=     "</section>";
             
@@ -81,22 +81,66 @@ function buildSpecificProductDisplay($product, $thumbs){
     $spd .=     "</section>";
             
     // The 'see review at bottom of page' block is on the page itself because it needs to optionally include a message
+    if(isset($_SESSION['loggedin'])){
+        $headerAccount = createHeaderAccount(true);
+    } else {
+        $headerAccount = createHeaderAccount(false);
+    }
             
     $spd .=     "<section id='spExtended'>";
     $spd .=     "    <p id='spDescription'>$product[invDescription]</p>";
     $spd .=     "    <section id='spReviewSection'>";
-    $spd .=     "        <h2>Customer Reviews</h2>";
-    $spd .=     "        <sub>Review the Monster Rubber Band</sub>";
-    $spd .=     "        <article class='spReview'>";
-    $spd .=     "            <h3 class='author'>TSawyer</h3>";
-    $spd .=     "            <p class='timestamp'>wrote on 10 March, 2017:</p>";
-    $spd .=     "            <p class='comment'>This is wonderful. You can catch an elephant with this thing!</p>";
-    $spd .=     "        </article>";
-    $spd .=     "        <article class='spReview'>";
-    $spd .=     "            <h3 class='author'>TSawyer</h3>";
-    $spd .=     "            <p class='timestamp'>wrote on 10 March, 2017:</p>";
-    $spd .=     "            <p class='comment'>This is wonderful. You can catch an elephant with this thing!</p>";
-    $spd .=     "        </article>";
+    $spd .=     "       <h2>Customer Reviews</h2>";
+    if(isset($_SESSION['loggedin'])){
+        $spd .= "<sub>Review the $product[invName]:</sub>";
+        
+        //All the review form stuff
+        $clientData = $_SESSION['clientData'];
+        $first = $clientData['clientFirstname'];
+        $last = $clientData['clientLastname'];
+        $username = substr($first, 0, 1).$last;
+        echo $product['invId'];
+        
+        //This form goes to the reviews controller with action=addReview
+        //Passes reviewField, clientId, InvId
+        $spd .="<form action='/acme/reviews/index.php' id='reviewForm' method='post'>";
+        $spd .="<p>Name: $username</p>";
+
+        $spd .="<label for='reviewField'>Review:</label>";
+        $spd .="<textarea id='reviewField' name='reviewField' rows='4' required>";
+            if( isset($invDescription) ){                   $spd .= $invDescription;
+            } elseif( isset($prodInfo['invDescription']) ){ $spd .= $prodInfo['invDescription']; }
+        $spd .="</textarea>";
+        $spd .="<input type='hidden' name='invId' value='";
+            $spd .= $product['invId'];
+            $spd .="'>";
+        $spd .="<input type='hidden' name='clientId' value='";
+            if(isset($clientData['clientId'])){ $spd .= $clientData['clientId'];    }
+            $spd .= "'>";
+        $spd .="<input type='hidden' name='action' value='addReview'>";
+
+        $spd .="<input type='submit' value='Submit Review'>";
+        $spd .="</form>";
+        
+    } else {
+        $spd .= "       <sub><a href='/acme/accounts/index.php?action=login'>Log in</a> to leave a review!</sub>";
+    }
+    $spd .=     "       <section id='spReviews'>";
+    foreach ($itemReviews as $row){
+                //Insert the item reviews
+                //Reviews are listed most recent first thanks to 'ORDER BY reviewDate DESC' in SQL query
+                $rFirst = $row['clientFirstname'];
+                $rLast = $row['clientLastname'];
+                $rUsername = substr($rFirst, 0, 1).$rLast;
+                $rDate = date('j F Y', strtotime($row['reviewDate']) );
+
+                $spd .=     "<article class='spReview'>";
+                $spd .=     "   <h3 class='author'>$rUsername</h3>";
+                $spd .=     "   <p class='timestamp'>written on $rDate:</p>";
+                $spd .=     "   <p class='comment'>$row[reviewText]</p>";
+                $spd .=     "</article>";
+    }
+    $spd .=     "       </section>";
     $spd .=     "    </section>";
                 
     $spd .=     "</section>";

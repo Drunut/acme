@@ -188,11 +188,23 @@ body{
     font-size: 1.05em;
 }
 
+#spReviews{
+    border-top: 3px black solid;
+    margin-top: 2vmin;
+}
+
+/*The form*/
+#reviewForm{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
 .spReview{
     display: flex;
     flex-wrap: wrap;
     font-family: sans-serif;
-    margin-top: 6vmin;
+    margin-top: 5vmin;
 }
 .spReview .author{
     flex-grow: 0;
@@ -210,6 +222,7 @@ body{
     flex-grow: 1;
     padding: 1.5vmin;
     background-color: white;
+    flex-basis: 100%;
 }
 
 

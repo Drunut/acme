@@ -56,16 +56,49 @@
                 <section id="spReviewSection">
                     <h2>Customer Reviews</h2>
                     <sub>Review the Monster Rubber Band</sub>
-                    <article class="spReview">
-                        <h3 class="author">TSawyer</h3>
-                        <p class="timestamp">wrote on 10 March, 2017:</p>
-                        <p class="comment">This is wonderful. You can catch an elephant with this thing!</p>
-                    </article>
-                    <article class="spReview">
-                        <h3 class="author">TSawyer</h3>
-                        <p class="timestamp">wrote on 10 March, 2017:</p>
-                        <p class="comment">This is wonderful. You can catch an elephant with this thing!</p>
-                    </article>
+                    
+                        <form action="/acme/reviews/index.php" id="reviewForm" method="post">
+                            <?php
+                                    // This stuff goes in reviews controller
+                                    $clientData = '';       //$_SESSION['clientData'];
+                                    $first = 'Nikolaas';    //$clientData['clientFirstName'];
+                                    $last = 'Tekulve';      //$clientData['clientLastName'];
+                                    $username = substr($first, 0, 1).$last;
+                            ?>
+
+                            <p>Name: <?php echo $username; ?></p>
+
+                            <!-- <label for="userName">Username:</label>
+                            <input type="text" id="userName" name="userName" required readonly <?php //echo "value='$username'"; ?> > -->
+
+                            <label for="invDescription">Review:</label>
+                            <textarea id="invDescription" name="invDescription" rows="4" required><?php
+                                    if( isset($invDescription) ){
+                                        echo $invDescription;
+                                    } elseif( isset($prodInfo['invDescription']) ) {
+                                        echo $prodInfo['invDescription'];
+                                    }
+                                ?></textarea>
+                            <input type="hidden" name="invId" value="<?php if(isset($prodInfo['invId'])){ echo $prodInfo['invId'];} elseif(isset($invId)){ echo $invId; } ?>">
+                            <input type="hidden" name="clientId" value="<?php if(isset($clientData['clientId'])){ echo $clientData['clientId'];} ?>">
+                            <input type="hidden" name="action" value="addReview">
+
+                            <input type="submit" value="Submit Review">
+
+
+                        </form>
+                    <section id="spReviews">
+                        <article class="spReview">
+                            <h3 class="author">TSawyer</h3>
+                            <p class="timestamp">wrote on 10 March, 2017:</p>
+                            <p class="comment">This is wonderful. You can catch an elephant with this thing!</p>
+                        </article>
+                        <article class="spReview">
+                            <h3 class="author">TSawyer</h3>
+                            <p class="timestamp">wrote on 10 March, 2017:</p>
+                            <p class="comment">This is wonderful. You can catch an elephant with this thing!</p>
+                        </article>
+                    </section>
                 </section>
                 
             </section>

@@ -51,9 +51,9 @@ function addReview( $reviewText, $reviewDate, $invId, $clientId ){
 // Get Reviews by inventory ID
 function getItemReviews($invId) {
     // Param:   integer inventory ID
-    // Return:  $itemReviews[row][columns]
+    // Return:  $itemReviews[row][columns]:: rId, rText, rDate, cFirstname, cLastname:: Returns most recent review first
     $db = acmeConnect();
-    $sql = 'SELECT * FROM reviews WHERE invId = :invId';
+    $sql = 'SELECT r.reviewId, r.reviewText, r.reviewDate, c.clientFirstname, c.clientLastname FROM reviews r INNER JOIN clients c ON c.clientId = r.clientId WHERE r.invId = :invId ORDER BY r.reviewDate DESC';
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     $stmt->execute();
