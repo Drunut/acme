@@ -99,7 +99,6 @@ function buildSpecificProductDisplay($product, $thumbs, $itemReviews){
         $first = $clientData['clientFirstname'];
         $last = $clientData['clientLastname'];
         $username = substr($first, 0, 1).$last;
-        echo $product['invId'];
         
         //This form goes to the reviews controller with action=addReview
         //Passes reviewField, clientId, InvId
@@ -119,7 +118,7 @@ function buildSpecificProductDisplay($product, $thumbs, $itemReviews){
             $spd .= "'>";
         $spd .="<input type='hidden' name='action' value='addReview'>";
 
-        $spd .="<input type='submit' value='Submit Review'>";
+        $spd .="<input type='submit' value='Submit'>";
         $spd .="</form>";
         
     } else {

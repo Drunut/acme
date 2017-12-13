@@ -6,7 +6,7 @@
 
 
 // INSERT a review
-function addReview( $reviewText, $reviewDate, $invId, $clientId ){
+function addReview( $reviewText, $invId, $clientId ){
     //Param: String reviewText, String reviewDate, Integer invId, Integer clientId
     //Return: Integer rowsChanged => 0 fail, 1 success
     
@@ -20,7 +20,7 @@ function addReview( $reviewText, $reviewDate, $invId, $clientId ){
             , clientId )
             VALUES
             ( :reviewText
-            , :reviewDate
+            , SYSDATE()
             , :invId
             , :clientId )';
     
@@ -31,7 +31,6 @@ function addReview( $reviewText, $reviewDate, $invId, $clientId ){
     // statement with the actual values in the variables
     // and tells the database the type of data it is
     $stmt->bindValue(':reviewText', $reviewText, PDO::PARAM_STR);
-    $stmt->bindValue(':reviewDate', $reviewDate, PDO::PARAM_STR);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
     
@@ -66,9 +65,9 @@ function getItemReviews($invId) {
 // Get product information by client ID
 function getClientReviews($clientId){
     // Param:   integer client ID
-    // Return:  $clientReviews[row][column]
+    // Return:  $clientReviews[row][column]:: rId, rText, rDate, rInvId, iInvName
     $db = acmeConnect();
-    $sql = 'SELECT * FROM reviews WHERE clientId = :clientId';
+    $sql = 'SELECT r.reviewId, r.reviewText, r.reviewDate, r.invId, i.invName FROM reviews r INNER JOIN inventory i ON r.invId = i.invId WHERE r.clientId = :clientId ORDER BY r.reviewDate DESC';
     
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
@@ -82,21 +81,21 @@ function getClientReviews($clientId){
 // Get specific review by review ID
 function getReview($reviewId){
     // Param:   integer review ID
-    // Return:  $specificReview[columns]
+    // Return:  $specificReview[columns]:: rId, rText, rDate, rInvId, rClientId, iInvName, cFirstname, cLastname
     $db = acmeConnect();
-    $sql = 'SELECT * FROM reviews WHERE reviewId = :reviewId';
+    $sql = 'SELECT r.reviewId, r.reviewText, r.reviewDate, r.invId, r.clientId, i.invName, c.clientFirstname, c.clientLastname FROM reviews r INNER JOIN inventory i ON r.invId = i.invId INNER JOIN clients c ON r.clientId = c.clientId WHERE r.reviewId = :reviewId';
     
     $stmt = $db->prepare($sql);
     $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);
     $stmt->execute();
-    $review = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $review = $stmt->fetch(PDO::FETCH_ASSOC);
     $stmt->closeCursor();
     
     return $review;
 }
 
 // Update a review using review ID
-function updateReview( $reviewId, $reviewText, $reviewDate, $invId, $clientId ){
+function updateReview( $reviewId, $reviewText, $invId, $clientId ){
     //Param: Int reviewId, Str reviewText, Str reviewDate, Int invId, Int clientId
     //Return: Integer rowsChanged => 0 fail, 1 success
     
@@ -105,7 +104,7 @@ function updateReview( $reviewId, $reviewText, $reviewDate, $invId, $clientId ){
     // The SQL statement
     $sql = 'UPDATE reviews SET
               reviewText = :reviewText
-            , reviewDate = :reviewDate
+            , reviewDate = SYSDATE()
             , invId = :invId
             , clientId = :clientId
             WHERE reviewId = :reviewId';
@@ -117,7 +116,6 @@ function updateReview( $reviewId, $reviewText, $reviewDate, $invId, $clientId ){
     // statement with the actual values in the variables
     // and tells the database the type of data it is
     $stmt->bindValue(':reviewText', $reviewText, PDO::PARAM_STR);
-    $stmt->bindValue(':reviewDate', $reviewDate, PDO::PARAM_STR);
     $stmt->bindValue(':invId', $invId, PDO::PARAM_INT);
     $stmt->bindValue(':clientId', $clientId, PDO::PARAM_INT);
     $stmt->bindValue(':reviewId', $reviewId, PDO::PARAM_INT);

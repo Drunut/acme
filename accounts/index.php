@@ -11,6 +11,8 @@ require_once '../model/accounts-model.php';
 require_once '../library/functions.php';
 // Get the acme model for use as needed
 require_once '../model/acme-model.php';
+// Get the review model so we can see user reviews
+require_once '../model/reviews-model.php';
 $categories = getCategories();
 
 // Modularized the Header stuff since it was getting used across three controllers
@@ -42,6 +44,8 @@ switch ($action) {
 		break;
         case 'admin':
                 if ($_SESSION['loggedin']){
+                    // Get user reviews
+                    $clientReviews = getClientReviews($clientData['clientId']);
                     include "../view/admin.php";
                     break;
                 } else {
@@ -134,6 +138,8 @@ switch ($action) {
             setcookie('firstname', $clientData['clientFirstname'], strtotime('+1 year'), '/');
             // Send them to the admin view
             $message = "<h2 class='message'>You are now logged in</h2>";
+            // Get user reviews
+            $clientReviews = getClientReviews($clientData['clientId']);
             include '../view/admin.php';
             exit;
         case 'logout':

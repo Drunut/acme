@@ -301,6 +301,13 @@ Admin Page
     margin: 1em 0 .25em 0;
 }
 
+/*Formatting for the comments is found in specific product page rules below
+Exept for the rules found here */
+
+.clientReview .actions{
+    padding-top: 0.5vmin;
+}
+
 
 /***************************
 Random Garbage Table Styling I shamelessly lifted off w3schools and tweaked
@@ -478,7 +485,7 @@ Product Detail Page
         background-color: lightgray;
 /**/}
 
-/**/#spReviewSection{
+/**/#spReviewSection, #clientReviews{
 /**/    margin: 2vmin 0 0 0;
         padding: 1em;
         background-color: khaki;
@@ -487,14 +494,14 @@ Product Detail Page
         flex-direction: column;
         justify-content: space-around;
 /**/}
-#spReviewSection > h2{
+#spReviewSection > h2, #clientReviews > h2{
     font-size: 1.8em;
 }
 #spReviewSection > sub{
     font-size: 1.05em;
 }
 
-#spReviews{
+#spReviews, #clientReviews{
     border-top: 3px black solid;
     margin-top: 2vmin;
 }
@@ -506,29 +513,30 @@ Product Detail Page
     flex-wrap: nowrap;
 }
 
-.spReview{
+.spReview, .clientReview{
     display: flex;
     flex-wrap: wrap;
     font-family: sans-serif;
-    margin-top: 5vmin;
+    margin-top: 4vmin;
 }
-.spReview .author{
+.spReview .author, .clientReview .item{
     flex-grow: 0;
     margin-right: 1em;
     font-size: 1.25em;
 }
-.spReview .timestamp{
+.spReview .timestamp, .clientReview .timestamp{
     flex-grow: 0;
     font-size: .75em;
     font-style: italic;
     
     align-self: flex-end;
 }
-.spReview .comment{
+.spReview .comment, .clientReview .comment{
     flex-grow: 1;
     padding: 1.5vmin;
     background-color: white;
     flex-basis: 100%;
+    margin-top: 0.1vmin;
 }
 
 
