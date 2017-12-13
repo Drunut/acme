@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 13, 2017 at 11:17 PM
+-- Generation Time: Dec 14, 2017 at 12:42 AM
 -- Server version: 10.1.26-MariaDB
 -- PHP Version: 7.1.9
 
@@ -66,7 +66,8 @@ CREATE TABLE `clients` (
 
 INSERT INTO `clients` (`clientId`, `clientFirstname`, `clientLastname`, `clientEmail`, `clientPassword`, `clientLevel`, `comments`) VALUES
 (1, 'Nik', 'Tek', 'teknik@booty.edu', '$2y$10$gn/GZYq5W5te31FDHVXxJeix/J3ZQgxWwBddkYud9594wK4xLCXcS', '1', ''),
-(8, 'Admin', 'User', 'admin@cit336.net', '$2y$10$rOrTUbLdzdCt494d9KEO.ej0u8HCBSKrytjX9AFYnQRyHMe8uEw4S', '3', '');
+(8, 'Admin', 'User', 'admin@cit336.net', '$2y$10$rOrTUbLdzdCt494d9KEO.ej0u8HCBSKrytjX9AFYnQRyHMe8uEw4S', '3', ''),
+(11, 'Dumb', 'Loser', 'dumb@lol.com', '$2y$10$APDZfodoDxffZI3sFrVZaOFXhRwsbptiatqaw0btY253l4XFw/KEy', '1', '');
 
 -- --------------------------------------------------------
 
@@ -195,8 +196,9 @@ CREATE TABLE `reviews` (
 INSERT INTO `reviews` (`reviewId`, `reviewText`, `reviewDate`, `invId`, `clientId`) VALUES
 (7, 'Shabadabood', '2017-12-13 22:06:54', 7, 1),
 (8, 'I love my life', '2017-12-13 19:52:35', 7, 1),
-(10, 'I flew too far, and then I exploded! Do not recommend for cheap travel!', '2017-12-13 22:11:09', 2, 1),
-(11, 'Love it! I&#39;m not a robot!', '2017-12-13 22:12:50', 2, 8);
+(10, 'I flew too far, and then I exploded! Do not recommend for cheap travel!', '2017-12-13 23:03:12', 2, 1),
+(11, 'Love it! I&#39;m not a robot!', '2017-12-13 22:12:50', 2, 8),
+(17, 'I like this rocket but I don&#39;t know which end to light it on!', '2017-12-13 23:26:36', 2, 11);
 
 --
 -- Indexes for dumped tables
@@ -250,7 +252,7 @@ ALTER TABLE `categories`
 -- AUTO_INCREMENT for table `clients`
 --
 ALTER TABLE `clients`
-  MODIFY `clientId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `clientId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `images`
@@ -268,7 +270,7 @@ ALTER TABLE `inventory`
 -- AUTO_INCREMENT for table `reviews`
 --
 ALTER TABLE `reviews`
-  MODIFY `reviewId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `reviewId` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- Constraints for dumped tables
